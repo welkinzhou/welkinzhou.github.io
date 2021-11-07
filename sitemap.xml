@@ -67,13 +67,6 @@
 
   
   <url>
-    <loc>https://welkinzhou.github.io/tags/Hexo-Theme-LiveMyLife/</loc>
-    <lastmod>2021-11-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://welkinzhou.github.io/tags/Web-notes/</loc>
     <lastmod>2021-11-07</lastmod>
     <changefreq>daily</changefreq>
@@ -88,13 +81,6 @@
   </url>
   
 
-  
-  <url>
-    <loc>https://welkinzhou.github.io/categories/Hexo-Theme-LiveMyLife/</loc>
-    <lastmod>2021-11-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
   
   <url>
     <loc>https://welkinzhou.github.io/categories/Web-notes/</loc>
