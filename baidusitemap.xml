@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://welkinzhou.github.io/en/Hexo-Theme-LiveMyLife/</loc>
-    <lastmod>2020-04-16</lastmod>
+    <loc>https://welkinzhou.github.io/async/%E5%BC%82%E6%AD%A5%E7%90%86%E8%A7%A3/</loc>
+    <lastmod>2021-11-07</lastmod>
+  </url>
+  <url>
+    <loc>https://welkinzhou.github.io/func/FP/</loc>
+    <lastmod>2021-11-07</lastmod>
   </url>
   <url>
     <loc>https://welkinzhou.github.io/cn/Hexo-Theme-LiveMyLife/</loc>

@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://welkinzhou.github.io/async/%E5%BC%82%E6%AD%A5%E7%90%86%E8%A7%A3/</loc>
+    
+    <lastmod>2021-11-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://welkinzhou.github.io/func/FP/</loc>
+    
+    <lastmod>2021-11-07</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://welkinzhou.github.io/tags/index.html</loc>
     
     <lastmod>2021-10-12</lastmod>
@@ -19,13 +33,6 @@
     <loc>https://welkinzhou.github.io/404.html</loc>
     
     <lastmod>2021-10-12</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://welkinzhou.github.io/en/Hexo-Theme-LiveMyLife/</loc>
-    
-    <lastmod>2020-04-16</lastmod>
     
   </url>
   
@@ -53,7 +60,7 @@
 
   <url>
     <loc>https://welkinzhou.github.io/</loc>
-    <lastmod>2021-10-12</lastmod>
+    <lastmod>2021-11-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -61,7 +68,21 @@
   
   <url>
     <loc>https://welkinzhou.github.io/tags/Hexo-Theme-LiveMyLife/</loc>
-    <lastmod>2021-10-12</lastmod>
+    <lastmod>2021-11-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://welkinzhou.github.io/tags/Web-notes/</loc>
+    <lastmod>2021-11-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://welkinzhou.github.io/tags/JS-learning/</loc>
+    <lastmod>2021-11-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -70,7 +91,14 @@
   
   <url>
     <loc>https://welkinzhou.github.io/categories/Hexo-Theme-LiveMyLife/</loc>
-    <lastmod>2021-10-12</lastmod>
+    <lastmod>2021-11-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://welkinzhou.github.io/categories/Web-notes/</loc>
+    <lastmod>2021-11-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
