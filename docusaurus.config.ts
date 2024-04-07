@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Welkin blog',
-  tagline: 'Dinosaurs are cool',
+  tagline: '记录，若干年回首也会惊喜吧',
   favicon: 'img/ava.png',
 
   // Set the production url of your site here
@@ -15,8 +15,8 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'welkinzhou', // Usually your GitHub org/user name.
+  projectName: 'welkinzhou.github.io', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -41,11 +41,10 @@ const config: Config = {
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
+          routeBasePath: '/',
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          readingTime: ({ content, frontMatter, defaultReadingTime }) =>
+            defaultReadingTime({ content, options: { wordsPerMinute: 300 } }),
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -57,33 +56,37 @@ const config: Config = {
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
+    },
     navbar: {
-      title: 'My Site',
+      title: '经验日省，智慧日增',
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/ava.png',
       },
       items: [
         {
           label: "学习",
           position: "right",
           items: [
-
             {
-              label: "CSS 摘记",
-              to: "docs/css/css-notes",
+              label: "前端基础",
+              to: "docs/basic/intro",
             },
             {
-              label: "算法",
-              to: "docs/algorithms/basic",
+              label: "Vue",
+              to: "docs/vue/diff",
             },
             {
-              label: "语言学习",
-              to: "docs/languages/javascript-basic",
+              label: "React",
+              to: "docs/react/example",
             },
           ],
         },
-        { to: '/blog', label: 'Blog', position: 'right' },
+        { to: '/', label: 'Blog', position: 'right' },
       ],
     },
     footer: {
