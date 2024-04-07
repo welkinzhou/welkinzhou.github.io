@@ -15,8 +15,10 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
+  deploymentBranch: 'gh-pages',
   organizationName: 'welkinzhou', // Usually your GitHub org/user name.
   projectName: 'welkinzhou.github.io', // Usually your repo name.
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -93,15 +95,11 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: '学习笔记',
           items: [
             {
-              label: 'CSS',
-              to: 'docs/css/',
-            },
-            {
-              label: '算法',
-              to: 'docs/algorithms/',
+              label: '前端基础',
+              to: 'docs/basic/intro',
             },
           ],
         },
