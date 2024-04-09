@@ -80,7 +80,7 @@ const config: Config = {
             },
             {
               label: "Vue",
-              to: "docs/vue/diff",
+              to: "docs/vue/intro",
             },
             {
               label: "React",
@@ -131,6 +131,7 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ['Bash'],
     },
   } satisfies Preset.ThemeConfig,
 };
