@@ -1,9 +1,11 @@
 ---
 sidebar_position: 1
-tags: [vue]
+tags: [vue, diff, diff 算法]
 ---
 
 ## Vue diff 加最长递增子序列
+
+diff 这部分，准确说和 Vue 的关系不是很密切，单独看也可以，也有人面试遇到了，这就抽出来先写一下。
 
 Virtual DOM diff 的作用是，对比 Virtual DOM，尽量复用老的 DOM，而不是直接创建新 DOM 进行删除替换，减少 DOM 操作消耗。复用的方式，包括移动位置、或者修改已有 DOM 的内容。之前其实粗略看了下 diff 怎么实现的，有点不求甚解的感觉。今天准备静下心，认真看一遍，了解其中的细节。
 
