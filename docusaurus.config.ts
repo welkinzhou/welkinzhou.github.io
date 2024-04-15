@@ -84,7 +84,7 @@ const config: Config = {
             },
             {
               label: "React",
-              to: "docs/react/example",
+              to: "docs/react/intro",
             },
           ],
         },
@@ -100,6 +100,14 @@ const config: Config = {
             {
               label: '前端基础',
               to: 'docs/basic/intro',
+            },
+            {
+              label: "Vue",
+              to: "docs/vue/intro",
+            },
+            {
+              label: "React",
+              to: "docs/react/intro",
             },
           ],
         },

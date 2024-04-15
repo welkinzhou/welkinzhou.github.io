@@ -1,0 +1,363 @@
+---
+sidebar_position: 2
+tags: [react]
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# 创建项目基本结构
+
+基本的项目内容我是这样想的：普通的商城页面，一打开是首页，点击 shop，进入商品列表。商品有购买和加入购物车按钮，点击提示登录。登录后保存登录状态，一般是保存 token，这里简单点写入 cookie 设置过期时间。点击购物车图标，跳转购物车页面。商品信息，内容保存到 redux 中。UI 会在 codepen 找点合适的，先开始吧。
+
+### 创建项目，添加相关依赖
+
+首先使用 Vite 创建一个 React 项目，交互中选择 React 就行了：
+
+```bash
+npm create vite@latest
+```
+
+接下来引入 React Router，Redux，UI 库使用 antd。
+
+```bash
+npm install react-router-dom
+npm install @reduxjs/toolkit react-redux
+npm install antd --save
+```
+
+引入 Tailwind CSS：
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+在生成的 `tailwind.config.js` 文件中添加如下代码：
+
+```js title="tailwind.config.js"
+/** @type {import('tailwindcss').Config} */
+export default {
+  // highlight-start
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  // highlight-end
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+新建 tailwind.css，添加一下内容：
+
+```css title="src/style/tailwind.css"
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+引用 tailwind.css，接下来就可以使用了。
+
+按照我的习惯，会把很多内容删除掉，src 下面只需要保留 `assets` 文件夹和 `main.tsx`，`main.tsx` 中没有使用的内容记得删除掉。接下来新建几个目录，`componnets`、`router`、`store`、`style`、`views`，文件夹作用顾名思义。
+
+### 编译配置
+
+添加 path alias，这里包含两个。一个是编译的 alias，需要修改 `vite.config.ts`：
+
+```ts
+import path from "path";
+// get absolute path
+const resolve = (relativePath: string) => path.resolve(__dirname, relativePath);
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": resolve("src"), // path alias
+    },
+  },
+  server: {
+    host: "0.0.0.0", // listen on IP address
+  },
+})
+```
+
+上述配置只是编译器的配置，打包时候能够识别这个 alias，但是开发时 TypeScript 还是会报错。另外 __dirname 可能会报错找不到，应该 eslint 没有包括 node 环境。接下来修改 `tsconfig.json` 和 `.eslintrc.cjs`：
+
+<Tabs>
+  <TabItem value="tsconfig" label="tsconfig.json">
+
+    ```json
+    {
+      "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+          "@/*": [
+            "./src/*"
+          ]
+        },
+        -- snip --
+      },
+    }
+    ```
+
+  </TabItem>
+  <TabItem value="eslintrc" label=".eslintrc.cjs">
+
+    ```js
+    module.exports = {
+      env: { 
+      node: true,  // <---- add this
+      browser: true, 
+      es2020: true 
+      },
+     	-- snip --
+    };
+    
+    ```
+
+  </TabItem>
+
+</Tabs>
+
+官方文档有提供针对开发环境的 eslint 配置建议，照着操作即可：
+
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
+```
+
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+### Reset CSS
+
+style 中创建 index.ts，用于导入基础样式，首先是重置样式 reset.css，也可以安装 normalize.css, `npm install --save normalize.css`。这里使用的 [A (more) Modern CSS Reset](https://piccalil.li/blog/a-more-modern-css-reset/)。
+
+```css title="/src/style/reset.css"
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin-block-end: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+```
+
+### Router
+
+接下来添加 router，router 创建文件 index.tsx，导出 router 配置，main.tsx 中使用：
+
+<Tabs>
+  <TabItem value="router" label="src/router/index.tsx">
+
+    ```tsx
+    import { createBrowserRouter } from "react-router-dom";
+    import Layout from "../components/core/Layout";
+    import ErrorPage from "../components/core/ErrorPage";
+    import NotFound from "../components/core/404";
+    import Home from "../views/Home/Home";
+    
+    const routes = createBrowserRouter([
+      {
+        path: "/",
+        element: <Layout />,
+        children: [
+          {
+            index: true,
+            element: <Home />,
+          },
+        ],
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ]);
+    
+    export default routes;
+    ```
+
+  </TabItem>
+  <TabItem value="main" label="main.tsx">
+
+    ```tsx
+    import React from "react";
+    import ReactDOM from "react-dom/client";
+    // highlight-next-line
+    import { RouterProvider } from "react-router-dom";
+    // highlight-next-line
+    import router from "./router/index";
+    import "./style/index.ts";
+    
+    ReactDOM.createRoot(document.getElementById("root")!).render(
+      <React.StrictMode>
+        // highlight-next-line
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    );
+    ```
+
+  </TabItem>
+
+</Tabs>
+
+整体结构比较简单，404 的页面我给拆分了出来。其他页面，作为一组，是一个 nest 的结构。默认进来就是 Home 页面，在 nest router 中给子路由设置 `index: true` 可以设置默认匹配，类似 Vue-Router 的 redirect。404 页面很简单，单纯是静态 DOM，没有设置异常的报错。其他页面比较负责，可能出现问题，这里加了个 `errorElement: <ErrorPage />`，出现异常会显示的页面。
+
+看一下组件，首先是 Layout，很简单就是一个路由组件：
+
+```tsx
+import React from "react";
+import { Outlet } from "react-router-dom";
+
+const Layout = () => {
+  return <Outlet />;
+};
+
+export default Layout;
+```
+
+ErrorPage 和 404 内容大致一样，就是静态内容：
+
+<Tabs>
+  <TabItem value="ErrorPage" label="src/components/core/ErrorPage.tsx">
+
+    ```tsx
+    import { useRouteError } from "react-router-dom";
+    
+    export default function ErrorPage() {
+      const error = useRouteError();
+      console.error(error);
+    
+      return (
+        <div id="error-page">
+          <h1>Oops!</h1>
+          <p>Sorry, an unexpected error has occurred.</p>
+          <p>
+            <i>{error.statusText || error.message}</i>
+          </p>
+        </div>
+      );
+    }
+    
+    ```
+
+  </TabItem>
+  <TabItem value="404" label="src/components/core/404.tsx">
+
+    ```tsx
+    import { useRouteError } from "react-router-dom";
+    
+    export default function ErrorPage() {
+      const error = useRouteError();
+      console.error(error);
+    
+      return (
+        <div id="error-page">
+          <h1>Oops!</h1>
+          <p>Sorry, page not found.</p>
+        </div>
+      );
+    }
+    ```
+
+  </TabItem>
+
+</Tabs>
+
+接下来就是页面内容了，比较复杂，下一章继续。

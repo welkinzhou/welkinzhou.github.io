@@ -3,9 +3,9 @@ sidebar_position: 1
 tags: [react]
 ---
 
-# React 官网教程
+# React 官网示例
 
-最近在看 React 官网，之前一直在用 Vue。看了看，进行了一些简单对比，算是总结一下。由于还没有正式开始 React 的项目，写的也比较浅显。
+官方网站的教程，很简单的应用，对于平常需要使用的 router、redux 都没有
 
 根据官网完成的井字棋（Tic-Tac-Toe）游戏：
 

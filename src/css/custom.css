@@ -16,8 +16,15 @@
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
+  /* 链接颜色 */
   --ifm-link-color: #55888B;
+  /* footer 颜色 */
+  /* --custom-footer-background-color: #96b6c1;
+  --custom-footer-color: #9cb9c1;
+  --custom-footer-link-color: #333;
+  --custom-footer-title-color: #333; */
 }
+
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
@@ -29,4 +36,11 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.footer--dark {
+  /* --ifm-footer-background-color: var(--custom-footer-background-color); */
+  /* --ifm-footer-color: var(--custom-footer-color);
+  --ifm-footer-link-color: var(--custom-footer-link-color);
+  --ifm-footer-title-color: var(--custom-footer-title-color); */
 }
