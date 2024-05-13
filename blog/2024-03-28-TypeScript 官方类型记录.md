@@ -3,6 +3,10 @@ authors: zhouyuan
 tags: [TypeScript]
 ---
 
+TypeScript 内置了一些类型，基础入门教程里可能提到的比较少。翻看声明文件，记录学习下。
+
+<!-- truncate -->
+
 # TypeScript 内置类型记录
 
 TypeScript 内置了一些类型，包括 ES5，ES6 语法 API 的类型声明，很多地方看起来很有意思。我也不知道学习 TypeScript 从哪里入手，索性看着写声明文件学习一下，遇到有趣的就记录一下。因此未有定序，不似别人脉络清晰，偶有所得，翻用自喜。
