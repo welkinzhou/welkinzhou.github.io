@@ -1,55 +1,62 @@
-import { themes as prismThemes } from 'prism-react-renderer';
-import type { Config } from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
-  title: 'Welkin blog',
-  tagline: '记录，若干年回首也会惊喜吧',
-  favicon: 'img/ava.png',
+  title: "Welkin blog",
+  tagline: "记录，若干年回首也会惊喜吧",
+  favicon: "img/ava.png",
 
   // Set the production url of your site here
-  url: 'https://welkinzhou.github.io',
+  url: "https://welkinzhou.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: "/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  deploymentBranch: 'gh-pages',
-  organizationName: 'welkinzhou', // Usually your GitHub org/user name.
-  projectName: 'welkinzhou.github.io', // Usually your repo name.
+  deploymentBranch: "gh-pages",
+  organizationName: "welkinzhou", // Usually your GitHub org/user name.
+  projectName: "welkinzhou.github.io", // Usually your repo name.
   trailingSlash: false,
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
+  markdown: {
+    mermaid: true,
+  },
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans'],
+    defaultLocale: "zh-Hans",
+    locales: ["zh-Hans"],
   },
-  themes: ['@docusaurus/theme-live-codeblock'],
+  themes: ["@docusaurus/theme-live-codeblock", "@docusaurus/theme-mermaid"],
   presets: [
     [
-      'classic',
+      "@docusaurus/preset-classic",
       {
         docs: {
-          sidebarPath: './sidebars.ts',
+          sidebarPath: "./sidebars.ts",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl:
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
-          routeBasePath: '/',
+          routeBasePath: "/",
           showReadingTime: true,
-          readingTime: ({ content, frontMatter, defaultReadingTime }) =>
-            defaultReadingTime({ content, options: { wordsPerMinute: 300 } }),
+          readingTime: ({ content, locale, frontMatter, defaultReadingTime }) =>
+            defaultReadingTime({
+              content,
+              locale,
+              options: { wordsPerMinute: 300 },
+            }),
         },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
       } satisfies Preset.Options,
     ],
@@ -57,17 +64,17 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: "img/docusaurus-social-card.jpg",
     docs: {
       sidebar: {
         hideable: true,
       },
     },
     navbar: {
-      title: '经验日省，智慧日增',
+      title: "经验日省，智慧日增",
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/ava.png',
+        alt: "My Site Logo",
+        src: "img/ava.png",
       },
       items: [
         {
@@ -88,18 +95,18 @@ const config: Config = {
             },
           ],
         },
-        { to: '/', label: 'Blog', position: 'right' },
+        { to: "/", label: "Blog", position: "right" },
       ],
     },
     footer: {
-      style: 'dark',
+      style: "dark",
       links: [
         {
-          title: '学习笔记',
+          title: "学习笔记",
           items: [
             {
-              label: '前端基础',
-              to: 'docs/basic/intro',
+              label: "前端基础",
+              to: "docs/basic/intro",
             },
             {
               label: "Vue",
@@ -112,25 +119,25 @@ const config: Config = {
           ],
         },
         {
-          title: '网址源代码',
+          title: "网址源代码",
           items: [
             {
-              label: 'GitHub 代码',
-              href: 'https://github.com/welkinzhou/welkinzhou.github.io',
+              label: "GitHub 代码",
+              href: "https://github.com/welkinzhou/welkinzhou.github.io",
             },
           ],
         },
         {
-          title: 'More',
+          title: "More",
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/welkinzhou',
+              label: "GitHub",
+              href: "https://github.com/welkinzhou",
             },
             {
-              label: '掘金',
-              href: 'https://juejin.cn/user/1702497163682365',
-            }
+              label: "掘金",
+              href: "https://juejin.cn/user/1702497163682365",
+            },
           ],
         },
       ],
@@ -139,7 +146,7 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ['Bash'],
+      additionalLanguages: ["Bash"],
     },
   } satisfies Preset.ThemeConfig,
 };
