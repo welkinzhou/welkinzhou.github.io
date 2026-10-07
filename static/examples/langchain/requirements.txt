@@ -1,0 +1,6 @@
+langchain>=1,<2
+langchain-core>=1,<2
+langgraph>=1,<2
+langchain-openai>=1,<2
+langchain-text-splitters>=1,<2
+numpy>=1.26,<3

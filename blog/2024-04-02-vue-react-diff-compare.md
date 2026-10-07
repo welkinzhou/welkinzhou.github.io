@@ -5,13 +5,13 @@ authors: zhouyuan
 tags: [Vue, React, Diff]
 ---
 
-最近复习了下 Vue 和 React 相关东西，发现两者 diff 和更新逻辑有很大差异，都很有意思。
+最近复习 Vue 和 React，发现两者在 diff 和更新逻辑上的取舍很不一样。顺着代码看下来，都挺有意思，记一下自己的理解。
 
 <!-- truncate -->
 
-diff 一直都是 Vue、React 框架核心的重要部分。了解过二者 diff 过程的都会发现，两个框架在 diff 过程和更新逻辑上有不同的考量。
+同样是比较虚拟 DOM，再更新页面，Vue 和 React 走的路却不太一样。先从 React 的 Fiber 看起。
 
-React fiber 是为了解决 React 16 前出现的一些问题，提出的新的渲染引擎。JS 单线程特质，导致执行 VDOM diff 和更新过程中，会阻塞其他事件的响应。如果 DOM 结构比较复杂，就出整个更新过程中，页面无响应的情况。
+React 16 引入了 Fiber。此前同步执行 VDOM diff 和更新时，如果任务太大，JS 主线程就会长时间被占住，页面也没法及时响应其他操作。Fiber 要处理的，就是这类问题。
 
 ## Fiber 逻辑
 
@@ -313,7 +313,7 @@ export const scheduleUpdate = (instance, partialState) => {
 };
 ```
 
-首先理解结构，Fiber 中查找节点用到了几个属性，parent、child、sibling。节点的 parent 指向父级节点，同一层的父级节点相同。父级节点有 child 属性，指向第一个子节点。子节点又会有 sibling 属性，指向下一个子节点。这样就构成了一个链条，parent -> parent's first child -> child's sibling -> next sibling -> ...。根据这几个属性，就可以遍历 diff 了。
+先看结构。这里用 parent、child、sibling 三个属性串起节点：parent 指向父节点，child 指向第一个子节点，sibling 指向下一个兄弟节点。顺着这几个指针，就能遍历整棵树。
 
 Diff 过程是一个深度优先的遍历，然后同层比较，再回溯到父级，将所有需要更新内容汇总到父级节点，统一更新。对于耗时久的操作，使用 `requestIdleCallback` 去分时执行，这样遇到新的操作，可以延迟更新，保证应用能响应，很巧妙。
 
@@ -321,4 +321,4 @@ Diff 过程是一个深度优先的遍历，然后同层比较，再回溯到父
 
 在 Vue 中就不存在相应的问题。原因就是 Template 语法，限制应用能操作的范围。这样就可以跳过很多不必要的对比，同时代理的模式，也使操作的粒度更细，很难遇到耗时很久的任务。
 
-为什么 React 会采用将所有 effect 汇总到顶部处理，我还有一些别的看法。在 DOM 的构建过程中，也是这样从外到内，从上至下的构建。这样把变更汇总到顶层，再做处理，也有一定的一致性。
+把 effect 汇总到顶部再处理，我还有一点自己的猜想：DOM 构建也是由外到内、从上到下的，把变更集中起来处理，看着有些相通之处。不过这只是我的理解，还需要继续看源码确认。

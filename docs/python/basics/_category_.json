@@ -1,0 +1,8 @@
+{
+  "label": "基础类型与语法",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "建立数值、容器、迭代、类型标注与异常处理的基础。"
+  }
+}

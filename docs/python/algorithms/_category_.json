@@ -1,0 +1,8 @@
+{
+  "label": "算法练习",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "通过遍历、哈希、双指针、滑动窗口、二分和前缀和串起基础 API。"
+  }
+}

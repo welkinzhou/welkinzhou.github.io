@@ -1,0 +1,8 @@
+{
+  "label": "标准库与容器选择",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "用 collections、heapq、bisect 处理计数、队列和有序数据，并理解复杂度。"
+  }
+}

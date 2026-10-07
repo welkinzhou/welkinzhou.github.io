@@ -1,0 +1,8 @@
+{
+  "label": "日常工程",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "组织函数和模块，用 pathlib 与上下文管理器管理文件。"
+  }
+}

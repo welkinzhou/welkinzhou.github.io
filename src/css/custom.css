@@ -1,46 +1,92 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
-
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #6ca9aa;
-  --ifm-color-primary-dark: #5c9d9f;
-  --ifm-color-primary-darker: #579596;
-  --ifm-color-primary-darkest: #477a7b;
-  --ifm-color-primary-light: #7eb3b4;
-  --ifm-color-primary-lighter: #86b8b9;
-  --ifm-color-primary-lightest: #a1c8c9;
+  --ifm-color-primary: #3d6b60;
+  --ifm-color-primary-dark: #376056;
+  --ifm-color-primary-darker: #345b52;
+  --ifm-color-primary-darkest: #2b4b43;
+  --ifm-color-primary-light: #43766a;
+  --ifm-color-primary-lighter: #467b6e;
+  --ifm-color-primary-lightest: #4f8b7d;
+  --welkin-page: #f1f5f4;
+  --welkin-surface: #ffffff;
+  --welkin-text: #243735;
+  --welkin-muted: #63736f;
+  --welkin-soft: #edf4f0;
+  --welkin-line: #e3ebe6;
+  --welkin-shadow: 0 18px 70px #1e3d3212;
+  --welkin-serif: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+  --ifm-font-family-base: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --ifm-background-color: var(--welkin-surface);
+  --ifm-background-surface-color: var(--welkin-surface);
+  --ifm-font-color-base: var(--welkin-text);
+  --ifm-heading-color: var(--welkin-text);
+  --ifm-heading-font-weight: 600;
+  --ifm-line-height-base: 1.8;
+  --ifm-link-color: var(--ifm-color-primary);
+  --ifm-navbar-height: 76px;
+  --ifm-navbar-background-color: var(--welkin-surface);
+  --ifm-navbar-shadow: 0 1px 0 var(--welkin-line);
+  --ifm-footer-background-color: var(--welkin-page);
+  --ifm-footer-color: var(--welkin-muted);
+  --ifm-footer-link-color: var(--welkin-muted);
+  --ifm-footer-title-color: var(--welkin-text);
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-
-  /* 链接颜色 */
-  --ifm-link-color: #55888B;
-  /* footer 颜色 */
-  /* --custom-footer-background-color: #96b6c1;
-  --custom-footer-color: #9cb9c1;
-  --custom-footer-link-color: #333;
-  --custom-footer-title-color: #333; */
+  --ifm-code-border-radius: 5px;
+  --ifm-global-radius: 8px;
+  --docusaurus-highlighted-code-line-bg: rgb(61 107 96 / 10%);
 }
 
-
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+[data-theme="dark"] {
+  --ifm-color-primary: #a8d1bd;
+  --ifm-color-primary-dark: #8ac1a6;
+  --ifm-color-primary-darker: #7bba9b;
+  --ifm-color-primary-darkest: #52a078;
+  --ifm-color-primary-light: #c6e1d4;
+  --ifm-color-primary-lighter: #d5e8df;
+  --ifm-color-primary-lightest: #ffffff;
+  --welkin-page: #152320;
+  --welkin-surface: #1d2e29;
+  --welkin-text: #e5efea;
+  --welkin-muted: #b0c4ba;
+  --welkin-soft: #293f35;
+  --welkin-line: #395047;
+  --welkin-shadow: 0 18px 70px #0003;
+  --docusaurus-highlighted-code-line-bg: rgb(168 209 189 / 12%);
 }
 
-.footer--dark {
-  /* --ifm-footer-background-color: var(--custom-footer-background-color); */
-  /* --ifm-footer-color: var(--custom-footer-color);
-  --ifm-footer-link-color: var(--custom-footer-link-color);
-  --ifm-footer-title-color: var(--custom-footer-title-color); */
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--ifm-navbar-height) + 16px); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--ifm-color-primary); outline-offset: 4px; }
+.theme-layout-navbar { padding-inline: max(24px, calc((100vw - 1136px) / 2)); }
+.navbar__brand { margin-right: 26px; }
+.navbar__logo img { border-radius: 50%; width: 38px; height: 38px; object-fit: cover; }
+.navbar__title { font-size: 23px; font-weight: 650; letter-spacing: -.8px; }
+.navbar__link { font-size: 14px; min-height: 44px; display: inline-flex; align-items: center; }
+.theme-layout-footer { border-top: 1px solid var(--welkin-line); padding-block: 38px 24px; }
+.theme-layout-footer .container { max-width: 1128px; }
+.footer__title { font-size: 14px; margin-bottom: 12px; }
+.footer__link-item { font-size: 13px; display: inline-block; padding-block: 4px; }
+.footer__copyright { color: var(--welkin-muted); font-size: 12px; margin-top: 22px; }
+.blog-wrapper { background: var(--welkin-page); }
+.blog-post-page .container, .blog-tags-post-list-page .container, .blog-authors-posts-page .container { padding-top: 36px; padding-bottom: 48px; }
+.blog-post-page article, .blog-tags-post-list-page article, .blog-authors-posts-page article { background: var(--welkin-surface); padding: 36px; border-radius: 12px; }
+.blog-post-page article .markdown { font-size: 16px; line-height: 1.95; }
+.blog-post-page article .markdown > p { margin-bottom: 1.4em; }
+.blog-post-page article h1 { font-size: clamp(27px, 3vw, 38px); line-height: 1.45; }
+.blog-post-page article h2 { font-size: 26px; margin-top: 1.8em; }
+.theme-doc-markdown { line-height: 1.9; }
+.theme-doc-markdown h1 { font-size: clamp(28px, 3vw, 38px); }
+.pagination-nav__link { background: var(--welkin-surface); border-color: var(--welkin-line); }
+
+@media (max-width: 996px) {
+  :root { --ifm-navbar-height: 66px; }
+  .theme-layout-navbar { padding-inline: 18px; }
+  .navbar__title { font-size: 21px; }
+  .navbar__logo img { width: 32px; height: 32px; }
+  .navbar-sidebar__items .navbar__link { display: block; }
 }
+@media (max-width: 640px) {
+  .blog-post-page article, .blog-tags-post-list-page article, .blog-authors-posts-page article { padding: 24px 20px; }
+  .blog-post-page .container, .blog-tags-post-list-page .container, .blog-authors-posts-page .container { padding-top: 20px; }
+  .blog-post-page article .markdown { font-size: 15px; }
+  .theme-layout-footer { padding-inline: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

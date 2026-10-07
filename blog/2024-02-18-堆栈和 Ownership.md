@@ -5,15 +5,15 @@ authors: zhouyuan
 tags: [Rust, Stack, Heap, 编程原理]
 ---
 
-学习 The Rust Programming Language，作者在阐述 Ownership 时，顺便科普了下堆栈的特点。看过之后觉得很有意思，整个 Rust 内存管理别出心裁，即不想手动释放内存，也不想使用 GC。约定了一整套规范，兼顾了安全和性能，也就是 Ownership 特性。常写 JS 的程序员，对于内存管理不是很在意，了解一下也很有意思。
+读 The Rust Programming Language 时，讲 Ownership 的章节顺便介绍了栈和堆。看完觉得挺有意思：不想手动释放内存，又不想依赖 GC，Rust 就用一套规则来管理，这就是 Ownership。平常写 JS，不太需要操心内存管理，换个角度看也很有收获。
 
 <!-- truncate -->
 
 # Rust Ownership 和堆栈的关系
 
-Ownership 是 Rust 中一个好玩的概念，很神奇的一种想法。
+我觉得 Ownership 有意思的地方，是它把平常不太会留意的内存管理问题，变成了写代码时必须考虑的事情。
 
-Ownership 是一套有关内存管理的规则，理解这套规则，首先需要回顾下栈和堆的概念。
+要理解这套规则，先回头看一下栈和堆。
 
 ## 栈和堆
 
@@ -48,7 +48,7 @@ Ownership 是一套有关内存管理的规则，理解这套规则，首先需�
 
 堆没有自动出栈的操作，也就意味着数据可能不被释放，造成内存泄漏。不同的语言有不同的要求，一些要求程序员必须手动释放内存。还有一些语言拥有垃圾回收（garbage collection），会定期查找不再使用的数据，释放掉对应空间。
 
-Rust 想出一个很神奇的折中方案。
+Rust 在这里选了一个折中的办法：用 Ownership 规则决定谁负责这份数据，以及什么时候释放。
 
 ## Ownership Rules
 
@@ -111,7 +111,7 @@ println!("{}", s) // 报错 borrow of moved value: `s`
 
 Ownership 转移后，s1 离开 scope 对应数据 drop 后，s 指向的数据源已经被销毁，不能访问。
 
-如果希望，深拷贝一份数据，Rust 也提供方法。如果希望 s 不失去 ownership，可以直接深拷贝一份。
+如果希望 s 保留 ownership，可以深拷贝一份数据。Rust 也提供了对应的方法：
 
 ```rust
 let s = String::from("anything");
@@ -140,7 +140,7 @@ fn take_and_give(s: String) -> String {
 }
 ```
 
-简单粗暴的处理方式，同时很有效。习惯了 GC，可能会对这种要求不适应。我个人觉得就是， Rust 把深拷贝，浅拷贝的思考过程显化了。通常写代码，只有遇到部分需要深拷贝时候，才会考虑两者的区别。Ownership 迫使你主动思考，这里需要怎么处理，习惯了也没有那么吓人。
+这套处理很直接，也很有效。习惯了 GC，刚开始可能会觉得不适应。我个人的感受是，Rust 把“这里该复制数据，还是转移 ownership”的问题摆到了眼前。以前往往出了问题才考虑深浅拷贝，现在得提前想清楚，习惯后也没有那么吓人。
 
 参考文章：
 

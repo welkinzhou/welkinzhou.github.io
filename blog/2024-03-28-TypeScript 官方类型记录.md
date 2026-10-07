@@ -3,13 +3,13 @@ authors: zhouyuan
 tags: [TypeScript]
 ---
 
-TypeScript 内置了一些类型，基础入门教程里可能提到的比较少。翻看声明文件，记录学习下。
+TypeScript 内置了一些类型，入门教程里不一定会细讲。最近翻声明文件，遇到有意思的就记下来。
 
 <!-- truncate -->
 
 # TypeScript 内置类型记录
 
-TypeScript 内置了一些类型，包括 ES5，ES6 语法 API 的类型声明，很多地方看起来很有意思。我也不知道学习 TypeScript 从哪里入手，索性看着写声明文件学习一下，遇到有趣的就记录一下。因此未有定序，不似别人脉络清晰，偶有所得，翻用自喜。
+这些声明里既有 ES5、ES6 API 的类型，也有不少值得琢磨的写法。我一时也不知道该从哪里继续学 TypeScript，索性边看声明文件边学。因此未有定序，不似别人脉络清晰，偶有所得，翻用自喜。
 
 ### is 使用
 
@@ -49,7 +49,7 @@ function isString(s: any): s is string {
 }
 ```
 
-假设有一个数据可能是 string 也可以是 number，当我们像把它看作其中一个类型使用时，可能就会报错。TypeScript 不知道此时这个数据确定的基础类型，如果我们使用了 String 上的方法，Number 上没有，就会判断程序可能运行出错，这就要用到 is。
+假设一个值可能是 string，也可能是 number，直接调用字符串方法就可能报错。我们心里知道它是什么，不代表 TypeScript 也知道，这时就可以用类型谓词帮它缩小范围。
 
 ```ts
 function test(some: any) {
@@ -92,7 +92,7 @@ infer 用来获取一个推断完成后要使用的类型，比如说 TypeScript
 type ReturnType<T> = T extends (...args: any[]) => infer P ? P : any;
 ```
 
-ReturnType 用来提取函数返回值类型，假设传入 T 是一个函数类型，P 代表 T 的返回值类型。也就是说，在 extends 后面，可以使用 infer 在某一位置插入一个类型变量，在 extends 成立后，可以使用 P 将占位的类型提取出来。
+ReturnType 用来提取函数返回值类型。这里的 `infer P` 先占住返回值的位置，等 `extends` 判断成立，就能用 P 拿到推断出的类型。
 
 这里将 then 的成功回调 `onfulfilled` 的类型提取出来用 F 表示。
 
@@ -100,7 +100,7 @@ ReturnType 用来提取函数返回值类型，假设传入 T 是一个函数类
 
 ### 常用的内置类型
 
-既然提到了 ReturnType，就顺便看一下还有那些功能性的内置类型。
+既然提到了 ReturnType，就顺便看一下其他常用的内置类型。
 
 **Partial**：Partial 可以把类型所有属性变成可选，实现就是在所有属性后面加上 ?。
 
@@ -241,4 +241,4 @@ type Capitalize<S extends string> = intrinsic;
 type Uncapitalize<S extends string> = intrinsic;
 ```
 
-`intrinsic` 关键字用来声明编译器需要提供的内置类型，怎么实现并不需要用户来考虑，知道功能就行了。
+`intrinsic` 表示这个类型需要编译器提供内置支持。不用在声明文件里找实现，知道它做什么就行。

@@ -1,0 +1,26 @@
+.page { max-width: 1160px; margin-inline: auto; padding: 60px 28px 80px; }
+.heading { margin-bottom: 38px; }
+.heading h1 { font: 500 46px/1.4 var(--welkin-serif); margin: 0; }
+.heading p { color: var(--welkin-muted); font-size: 15px; margin: 12px 0 0; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 245px; gap: 70px; }
+.posts { background: var(--welkin-surface); padding: 8px 32px; border-radius: 12px; }
+.sidebar { align-self: start; position: sticky; top: calc(var(--ifm-navbar-height) + 36px); }
+.sidebar h2 { font-size: 16px; margin: 0 0 16px; }
+.topics { display: flex; flex-direction: column; gap: 8px; }
+.topics a { color: var(--welkin-text); display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; padding: 10px 15px; border-radius: 6px; font-size: 14px; }
+.topics a:hover, .topics .active { background: var(--welkin-soft); color: var(--ifm-color-primary); text-decoration: none; }
+.topics span { color: var(--welkin-muted); font-size: 12px; }
+.quote { margin: 26px 0 0; border-top: 1px solid var(--welkin-line); padding-top: 25px; font: 500 21px/1.8 var(--welkin-serif); color: var(--welkin-muted); }
+.paginator { margin-top: 32px; }
+@media (max-width: 996px) { .layout { gap: 30px; grid-template-columns: minmax(0, 1fr) 190px; } }
+@media (max-width: 640px) {
+  .page { padding: 35px 20px 60px; }
+  .heading { margin-bottom: 25px; }
+  .heading h1 { font-size: 36px; }
+  .layout { display: flex; flex-direction: column-reverse; gap: 20px; }
+  .sidebar { position: static; }
+  .sidebar h2, .quote { display: none; }
+  .topics { flex-direction: row; flex-wrap: wrap; gap: 4px; }
+  .topics a { padding: 8px 11px; font-size: 12px; min-height: 42px; gap: 6px; }
+  .posts { padding: 0 20px; }
+}

@@ -1,23 +1,426 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
+.home {
+  background: var(--welkin-page);
+}
+.hero {
+  height: clamp(350px,61svh,560px);
   position: relative;
-  overflow: hidden;
+  isolation: isolate;
+  color: white;
+  overflow: clip;
+  background: #36584e;
 }
-
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.heroImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+  z-index: -2;
 }
-
-.buttons {
+.hero:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,rgba(8,33,26,.68),rgba(8,33,26,.28) 58%,rgba(8,33,26,.07));
+  z-index: -1;
+}
+.heroInner {
+  height: 100%;
   display: flex;
   align-items: center;
+  padding: 0 28px 62px;
+  max-width: 1160px;
+  margin-inline: auto;
+}
+.heroCopy {
+  position: sticky;
+  top: var(--hero-pin-top, auto);
+  opacity: var(--hero-opacity, 1);
+  max-width: 750px;
+}
+.heroCopy h1 {
+  font: 500 clamp(38px,4.4vw,62px)/1.42 var(--welkin-serif);
+  letter-spacing: .1em;
+  text-shadow: 0 2px 24px #102b2135;
+  margin: 0;
+  color: white;
+}
+.heroCopy>p {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #f1f5f2;
+  letter-spacing: .08em;
+  margin-bottom: 0;
+}
+.heroLinks {
+  display: flex;
+  gap: 24px;
+  margin-top: 30px;
+  align-items: center;
+}
+.hero .readButton {
+  background: #fff;
+  color: #294c40;
+  box-shadow: 0 5px 20px #09261914;
+}
+.hero .readButton:hover {
+  background: #e3eee7;
+}
+.scrollLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: white;
+  font-size: 14px;
+  border-bottom: 1px solid #ffffff60;
+}
+.content {
+  position: relative;
+  margin-top: -58px;
+  z-index: 2;
+  padding: 0 16px;
+  max-width: 1160px;
+  margin-inline: auto;
+}
+.floatingPanel {
+  background: var(--welkin-surface);
+  border-radius: 16px;
+  box-shadow: var(--welkin-shadow);
+  padding: 40px 44px 44px;
+}
+.sectionHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+.sectionHeading p {
+  font-size: 14px;
+  color: var(--welkin-muted);
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.textLink {
+  color: var(--ifm-color-primary);
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  white-space: nowrap;
+}
+.textLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.contentGrid {
+  display: grid;
+  grid-template-columns: minmax(0,2.1fr) minmax(230px,1fr);
+  gap: 42px;
+}
+.sideIntro {
+  padding: 5px 0 26px;
+  border-bottom: 1px solid var(--welkin-line);
+}
+.sideIntro h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+.sideIntro p {
+  font-size: 14px;
+  color: var(--welkin-muted);
+  line-height: 1.9;
+  margin-bottom: 0;
+}
+.sideTitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 24px 0 13px;
+}
+.topicLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.topicLinks a {
+  border: 1px solid var(--welkin-line);
+  font-size: 13px;
+  padding: 9px 14px;
+  border-radius: 6px;
+  min-height: 42px;
+}
+.topicLinks a:hover {
+  background: var(--welkin-soft);
+  border-color: var(--ifm-color-primary);
+}
+.sideNote {
+  color: var(--welkin-muted);
+  font-size: 13px;
+  margin-top: 27px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.sideNote:before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--ifm-color-primary);
+  border-radius: 50%;
+}
+.notesSection {
+  padding: 68px 44px 60px;
+}
+.noteGrid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 34px;
+}
+.noteEntry {
+  border-top: 1px solid var(--welkin-line);
+  padding-top: 24px;
+}
+.noteIcon {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 20px;
+  color: var(--ifm-color-primary);
+  display: flex;
+  align-items: center;
+}
+.noteIcon svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.noteEntry h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.noteEntry p {
+  font-size: 14px;
+  color: var(--welkin-muted);
+  margin-bottom: 14px;
+  max-width: 28ch;
+}
+.noteEntry>a {
+  font-size: 13px;
+  min-height: 44px;
+  color: var(--ifm-color-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.about {
+  margin: 0 44px 60px;
+  padding: 34px 0;
+  border-top: 1px solid var(--welkin-line);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.about img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.about h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.about p {
+  font-size: 14px;
+  color: var(--welkin-muted);
+  max-width: 65ch;
+}
+.about .textLink {
+  margin-left: auto;
+}
+.readButton {
+  display: inline-flex;
+  min-height: 46px;
+  padding: 9px 22px;
+  align-items: center;
   justify-content: center;
+  gap: 10px;
+  border-radius: 7px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background .18s;
+}
+.readButton:hover,.scrollLink:hover {
+  text-decoration: none;
+}
+.scrollLink:hover {
+  color: white;
+}
+.scrollLink svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sectionHeading h2,.sideIntro h3,.sideIntro p,.noteEntry h3,.about h2,.about p {
+  margin-top: 0;
+}
+.sectionHeading h2 {
+  margin-bottom: 0;
+  font-size: 27px;
+  letter-spacing: -.04em;
+  line-height: 1.4;
+}
+@media (max-width:996px) {
+  .heroInner {
+    padding-left: 40px;
+  }
+  .content {
+    max-width: 940px;
+  }
+  .floatingPanel {
+    padding: 32px;
+  }
+  .contentGrid {
+    gap: 28px;
+    grid-template-columns: minmax(0,1.7fr) minmax(210px,1fr);
+  }
+  .notesSection {
+    padding: 50px 24px;
+  }
+  .about {
+    margin-inline: 24px;
+  }
+}
+@media (max-width:640px) {
+  .hero {
+    height: clamp(325px,61svh,480px);
+  }
+  .heroImage {
+    object-position: 45% center;
+  }
+  .hero:after {
+    background: linear-gradient(90deg,#0b2c23b8,#0b2c2370);
+  }
+  .heroInner {
+    padding: 0 28px 35px;
+  }
+  .heroCopy h1 {
+    font-size: 39px;
+    letter-spacing: .06em;
+  }
+  .heroCopy>p {
+    font-size: 13px;
+    letter-spacing: 0;
+    margin-top: 16px;
+  }
+  .heroLinks {
+    margin-top: 24px;
+    gap: 20px;
+  }
+  .content {
+    margin-top: -34px;
+    padding: 0 12px;
+  }
+  .floatingPanel {
+    padding: 26px 21px 30px;
+    border-radius: 12px;
+  }
+  .sectionHeading {
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+  .sectionHeading h2 {
+    font-size: 23px;
+  }
+  .sectionHeading p {
+    font-size: 12px;
+  }
+  .sectionHeading .textLink {
+    font-size: 12px;
+    gap: 4px;
+  }
+  .sectionHeading .textLink svg {
+    width: 16px;
+  }
+  .contentGrid {
+    display: block;
+  }
+  .homeSidebar {
+    margin-top: 28px;
+    border-top: 1px solid var(--welkin-line);
+    padding-top: 22px;
+  }
+  .sideIntro {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .sideNote {
+    margin-top: 17px;
+  }
+  .notesSection {
+    padding: 44px 14px 30px;
+  }
+  .noteGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .noteEntry {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 0 16px;
+    padding-top: 20px;
+  }
+  .noteIcon {
+    grid-row: 1/4;
+    margin: 0;
+  }
+  .noteEntry h3 {
+    font-size: 18px;
+  }
+  .noteEntry p {
+    max-width: none;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .noteEntry>a {
+    font-size: 13px;
+  }
+  .about {
+    margin: 10px 14px 30px;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-top: 25px;
+  }
+  .about img {
+    width: 46px;
+    height: 46px;
+  }
+  .about>div {
+    flex: 1;
+  }
+  .about .textLink {
+    margin-left: 62px;
+    margin-top: -10px;
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .heroCopy {
+    position: static;
+    opacity: 1 !important;
+  }
+  .readButton {
+    transition: none;
+  }
 }

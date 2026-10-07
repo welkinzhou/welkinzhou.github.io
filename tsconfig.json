@@ -1,8 +1,35 @@
 {
-  // This file is not used in compilation. It is here just for a nice editor experience.
+  "$schema": "https://json.schemastore.org/tsconfig",
+  // Docusaurus handles bundling; this config is for the editor and npm run typecheck.
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
-    "baseUrl": "."
-  }
+    "ignoreDeprecations": "5.0",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  // Include site code, local plugins, build scripts and root-level configuration.
+  "include": [
+    "src/**/*",
+    "plugins/**/*",
+    "scripts/**/*",
+    "*.ts",
+    "*.js",
+    "*.cjs",
+    "*.mjs"
+  ],
+  // Generated bundles and standalone previews are not part of the site typecheck.
+  "exclude": [
+    "node_modules",
+    ".docusaurus",
+    ".cache-loader",
+    "build",
+    "dist",
+    "coverage",
+    "preview"
+  ]
 }

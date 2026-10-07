@@ -5,11 +5,11 @@ authors: zhouyuan
 tags: [HTML, DOM]
 ---
 
-前端框架真的带来了很多便利，有些便利甚至你都不知道。比如，form 组件的包装。了解了之后，觉得 HTML 的规范有些地方，真是像草稿一样简陋，有很多的 exceptions。还有很多相近，又不完全相同的概念。比如说 Node 和 Element 两个类，Element 是 Node 的拓展，本身又实现了很多重复又名称不一样的功能。再比如 Element 的 attributes 和 properties 有什么区别。
+前端框架替我们处理了不少细节，平常用着方便，回头看原生 API 才发现，有些概念其实没弄清楚。比如 Node 和 Element，名字很熟，方法也有重叠，区别在哪？再比如 attributes 和 properties，中文都叫属性，却不是一回事。这篇把几个容易搞混的地方记一下。
 
 <!-- truncate -->
 
-最近在看浏览器相关内容，又重温了一些基础知识。这些基础知识，不怎么用的到，还是记录下，好记性不如烂笔头。
+最近重温了一些浏览器基础。平常用框架多，有些原生 API 不常碰，一细看还真有不少疑问。
 
 ## Node 和 Element 的区别
 
@@ -86,11 +86,11 @@ Element 是 Node 的子类，两个类型侧重点不同。假设需要修改 DO
 
 ## HTML attributes 和 DOM properties
 
-中文 attributes 和 properties 中文，一般都翻译成属性，这两者概念上是有区别的。对于前端框架使用者来说，这两者的区别并没有那么重要，甚至是混用的，框架的工作抹平两者差异。我曾经被这两个东西搞迷糊过，刚好看到有人科普，记录一下（参考文章贴在后面了）。
+attributes 和 properties 通常都翻译成“属性”，很容易搞混。用框架时，这些差异往往被处理掉了，直接操作 DOM 才会遇到。我之前就绕晕过，刚好看到一篇解释，把理解记在这里，参考链接放在文末。
 
 ### HTML attributes
 
-加上了 HTML，这个东西就和 HTML 元素有关。比如说向下面这种：
+先看 HTML 标签里的属性：
 
 ```html
 <input id="demo" class="test" type="text" />
@@ -130,7 +130,7 @@ console.log(el.welkin); // { name: 'welkin' }，值为对象
 
 上面例子，可以看出来，attribute 和 property 是两个东西，可以同时存在，值互不相同。
 
-这样看，区分还是挺明显的，为什么有时候会混淆呢？因为 DOM 做了一些处理。
+这么看，两者区别挺明显。之所以有时觉得它们是一回事，是因为 DOM 会同步部分属性。
 
 #### 反射
 
@@ -164,9 +164,9 @@ img.height = 'px500' // 无效值，应用默认值，img 的 height="0"
 img.setAttribute('height', 'px500') // 无效值，直接写入，img 的 height="px500"，px500 无效，保持默认行为，也就是 img 不设置 height 的样子
 ```
 
-#### `<input>` 的 vlaue
+#### `<input>` 的 value
 
-`<input>` 的 value 很有意思，大多数框架对这部分的处理都是很强的。如果离开框架，很多人可能会在这上面栽跟头。Attribute 和 properties 中都有 value，但是两者并没有 reflect 关系。
+`<input>` 的 value 又有点特别。框架通常替我们处理了这部分，直接操作 DOM 时就容易踩坑。attribute 里的 value 和 property 里的 value，不能当成同一个值来改。
 
 例如下面的代码：
 
