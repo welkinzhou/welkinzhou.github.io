@@ -94,7 +94,7 @@ const config: Config = {
       },
     },
     navbar: {
-      title: "Welkin.",
+      title: "Welkin",
       logo: {
         alt: "Welkin 的头像",
         src: "img/ava.png",
@@ -121,7 +121,11 @@ const config: Config = {
           ],
         },
         { href: "/#about", label: "关于", position: "right" },
-        { href: "https://github.com/welkinzhou", label: "GitHub", position: "right" },
+        {
+          href: "https://github.com/welkinzhou",
+          label: "GitHub",
+          position: "right",
+        },
       ],
     },
     footer: {
