@@ -17,9 +17,9 @@ alwaysApply: false
 
 ## 字体与内容层级
 
-- 正文使用本地系统无衬线字体（PingFang SC、Microsoft YaHei、system-ui）；slogan 与博客列表主标题使用 `--welkin-serif` 的宋体衬线栈，不引入远程字体。
+- 正文使用本地系统无衬线字体（PingFang SC、Microsoft YaHei、system-ui）；博客列表主标题使用 `--welkin-serif` 的宋体衬线栈。首页 slogan 使用 `static/fonts/` 里的钟齐志莽行书本地子集（字体族 `Zhi Mang Xing`，许可见同目录 OFL），加载失败时回退宋体；不引入远程字体。
 - 文章正文桌面 16px、手机 15px，行高约 1.9–1.95；导航与摘要元信息约 12–14px，标题靠字号、字重与间距建立层级。
-- 首页 slogan 桌面约 38–62px、手机约 39px，字重 500、适度字距；避免让标题挤压手机上的后续内容。
+- 首页 slogan 桌面约 44–72px、手机约 44px，字重 400、行高约 1.35、字距约 0.02em。行书靠笔势而不是拉开字距；避免让标题挤压手机上的后续内容。
 - 界面文案简短、自然，沿用个人笔记语气；图标优先使用简洁 SVG，装饰性图标设置 `aria-hidden`。
 
 ## 布局与图片

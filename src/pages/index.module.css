@@ -1,3 +1,12 @@
+/* Slogan subset of Zhi Mang Xing (钟齐志莽行书), SIL OFL. License: /fonts/zhi-mang-xing-OFL.txt */
+@font-face {
+  font-family: "Zhi Mang Xing";
+  src: url("/fonts/zhi-mang-xing-slogan.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+3002, U+589E, U+6167, U+65E5, U+667A, U+7701, U+7ECF, U+9A8C, U+FF0C;
+}
 .home {
   background: var(--welkin-page);
 }
@@ -40,9 +49,12 @@
   max-width: 750px;
 }
 .heroCopy h1 {
-  font: 500 clamp(38px,4.4vw,62px)/1.42 var(--welkin-serif);
-  letter-spacing: .1em;
-  text-shadow: 0 2px 24px #102b2135;
+  font-family: "Zhi Mang Xing", var(--welkin-serif);
+  font-weight: 400;
+  font-size: clamp(44px,5vw,72px);
+  line-height: 1.35;
+  letter-spacing: .02em;
+  text-shadow: 0 1px 2px #102b2180,0 10px 28px #102b2140;
   margin: 0;
   color: white;
 }
@@ -315,8 +327,8 @@
     padding: 0 28px 35px;
   }
   .heroCopy h1 {
-    font-size: 39px;
-    letter-spacing: .06em;
+    font-size: 44px;
+    letter-spacing: .02em;
   }
   .heroCopy>p {
     font-size: 13px;
