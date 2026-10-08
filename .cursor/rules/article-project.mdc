@@ -1,0 +1,48 @@
+---
+description: 当前 Docusaurus 站点的文章分类、文件命名、博客结构、文档目录、标题层级与验证要求
+globs: "blog/**,docs/**,static/examples/**,sidebars.ts,docusaurus.config.ts,plugins/homepage-content.ts,scripts/preserve-blog-feeds.cjs"
+alwaysApply: false
+---
+
+# 项目文章规范
+
+## 分类、命名与资源
+
+- `blog/` 存放按时间发布的随笔、实践记录和阶段思考；`docs/` 存放按主题组织、具有阅读顺序的学习笔记和教程。分类取决于文章用途，不取决于写作风格。
+- 博客现有文件名包含 `YYYY-MM-DD.md` 和 `YYYY-MM-DD-主题.md` 两种形式；新增文件沿用日期前缀，标题写在 frontmatter。保留历史文件名，不为统一命名批量改名。
+- docs 按主题放在 `docs/<主题>/`，必要时继续按子主题分类；新章节沿用同目录的两位序号前缀，例如 `01-intro.md`、`02-nodes.md`。新建英文主题与描述使用小写短横线，现有中文命名保留。
+- 普通文章用 `.md`；需要 JSX 或 React 组件时用 `.mdx`。不要只因正文中有代码块就改为 MDX。
+- 博客图片沿用 `blog/img/<日期>/`，docs 图片沿用所属主题或子主题的 `img/`；可下载示例放在 `static/examples/<主题>/`，链接使用 `/examples/<主题>/...`。保留现有图片路径与链接，不擅自移动资源。
+- 以上是根据现有目录总结的默认约定；用户明确的新分类或命名要求优先。迁移已发布文章时同时处理引用、路由与重定向。
+
+## 博客与文档结构
+
+- 博客 frontmatter 维护 `title`、`authors`、`tags`，沿用已有 `slug` 和其他字段；当前作者 `zhouyuan` 定义在 `blog/authors.yml`。发布日期以已有文件日期或显式 `date` 为准，润色不改变日期与 URL。
+- 博客开头作为摘要，保留 `<!-- truncate -->` 分隔；摘要简述本篇问题，后面的正文继续展开，避免整段重复。新建长文设置合适的摘要分隔，短文无需强行添加。
+- docs 沿用 `title`、`description`、`sidebar_position`、`slug`、`tags` 等同目录字段；阅读顺序由 `sidebar_position` 和目录分类共同表达，不只依赖文件名。
+- `sidebars.ts` 当前按 `python`、`langchain`、`vue` 自动生成主题侧栏；子分类沿用 `_category_.json` 的 label、position 与索引设置。新增顶层主题时核对侧栏、导航和入口链接，普通新章节无需手工复制整份侧栏。
+- 博客列表位于 `/blog`，文档位于 `/docs`。保留 `docusaurus.config.ts` 中的历史博客重定向与 `scripts/preserve-blog-feeds.cjs` 中的订阅兼容处理。
+- 首页文章来自 `plugins/homepage-content.ts` 读取的博客插件元数据，不另维护文章列表。
+- 本站作者语气的参考包括《重新读 Vue 源码的一些感受》《CSS 动画相关》《项目优化》和 Agent、RAG 系列；通用表达偏好统一维护在 `.cursor/skills/article-writing/SKILL.md`。
+
+## 标题层级与目录
+
+- 通用 Markdown 的标题、引用块和列表用法由技能中的 [Markdown 文章规范](../skills/article-writing/references/markdown.md) 按格式加载；本节只维护当前站点的标题来源、目录和锚点适配。
+- 博客标题写在 frontmatter 的 `title` 中，详情页由 Docusaurus 渲染为 H1；正文从 H2 开始，不重复写 `# 文章标题`，也不把章节写成 H1。正文首个 Markdown 标题使用 H1 时，博客插件可能将它作为内容标题移除。
+- docs 沿用正文开头一个 `# 文档标题` 的写法；没有正文 H1 时，也可以由 frontmatter 的 `title` 自动生成。保留唯一的页面 H1，正文从 H2 开始，不通过 `hide_title` 掩盖错误层级。
+- 仅调整标题层级时，只改标题标记和确实重复的文章标题，保留正文、代码、标题文字、顺序与链接。补齐 frontmatter 时核对生成页面标题，保留原来的标题和 URL。
+- 检查重复标题、已有显式 ID 和锚点引用；MDX 新增显式 ID 使用 `{/* #heading-id */}`，保留既有可用锚点。
+- 默认目录显示 H2、H3。更深标题仍属于文章结构；确需显示时使用 `toc_max_heading_level`，不要为了出现在目录里抬高层级。
+
+## 补充说明与折叠
+
+- 非必读的背景或扩展说明使用 Docusaurus 内置的 `<details>` 与 `<summary>`，不添加 `open`，默认收起；summary 保持单行、标题简洁，按内容标明“选读”。标签和 Markdown 正文之间保留空行。
+- 短说明和提示可以使用 `:::note[标题]`、`:::info[标题]` 或 `:::tip[标题]`；风险与危险分别使用 warning、danger，不按装饰偏好选择类型。真正引用原文时使用 `>`。
+- 本站当前 `.md` 文件也按 MDX 格式编译，可直接使用上述能力，无需为折叠单独改成 `.mdx`。更改 Markdown 编译设置时重新核对支持情况。依据：[Details](https://docusaurus.io/docs/markdown-features#details)、[Admonitions](https://docusaurus.io/docs/markdown-features/admonitions)。
+
+## 验证与依据
+
+- 保留 frontmatter、slug、标签、链接目标、图片路径、代码块及 MDX/Mermaid 结构；涉及路由或资源移动时检查所有受影响引用。
+- 文章修改后检查差异并运行 `npm run build`；标题或结构变更还要核对生成页面的 H1、目录与锚点。涉及 TypeScript、React 组件或站点配置时同时运行 `npm run typecheck`。
+- 纯规则或技能编辑检查格式、引用与差异；技能使用 skill-creator 的 `quick_validate.py` 校验，不因只改说明文件要求完整站点构建。
+- 本文件是当前项目约定，不随通用写作技能迁移到其他项目。标题行为依据 Docusaurus [标题与目录](https://docusaurus.io/docs/markdown-features/toc)、[博客 frontmatter](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog#markdown-front-matter)、[docs frontmatter](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#markdown-front-matter)，以及项目安装的 Docusaurus 3.10.2 源码。

@@ -1,0 +1,11 @@
+---
+description: 所有文章共用的写作与润色入口，表达规范统一维护在可跨项目复用的 article-writing 技能中
+globs: "**/*.md,**/*.mdx"
+alwaysApply: false
+---
+
+# 文章写作入口
+
+撰写、改写或润色文章时，读取并应用 [article-writing](../skills/article-writing/SKILL.md)。该技能覆盖博客、学习笔记、教程及其他文章，不按技术主题拆分表达偏好。
+
+当前站点的文件分类、命名、元信息与标题渲染遵循 [项目文章规范](./article-project.mdc)。本文件只提供入口，不重复维护技能正文。
