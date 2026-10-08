@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 tags: [vue]
+description: "Vue 3.5 组件实践与 Vue 3.2 源码阅读路线，连接编译、响应式、调度和 DOM 更新。"
 ---
 
 # Vue 学习与源码阅读
@@ -9,7 +10,7 @@ tags: [vue]
 
 ## 版本与阅读约定
 
-截至 2026-10-07，官方最新稳定版是 [Vue 3.5.43](https://github.com/vuejs/core/releases/tag/v3.5.43)。3.6 仍处于预发布阶段，本文的实践示例以 Vue 3.5 为基准。
+截至 2026-10-08，官方最新稳定版是 [Vue 3.5.43](https://github.com/vuejs/core/releases/tag/v3.5.43)。3.6 仍处于预发布阶段，本文的实践示例以 Vue 3.5 为基准。
 
 源码文章保留原有 Vue 3.2 系列的阅读过程，并以 [v3.2.47](https://github.com/vuejs/core/tree/v3.2.47) 作为对照入口；涉及当前实现时，单独链接到 v3.5.43。源码片段中的 `-- snip --` 表示省略内容，适合辅助阅读，不能直接复制运行。内部函数、字段和构造参数不是公共 API，阅读时应切换到同一个 tag。
 

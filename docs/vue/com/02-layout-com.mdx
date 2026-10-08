@@ -3,6 +3,7 @@ label: "布局组件"
 sidebar_position: 2
 tags: [vue, 布局]
 slug: layout
+description: "实现 24 等分的 Row / Col，学习 props、插槽、computed、watch 与类型安全的依赖注入。"
 ---
 
 import Tabs from "@theme/Tabs";
@@ -345,7 +346,7 @@ watch(
 
 看一下直接添加 margin 的问题（这里给子元素添加了 `margin-left: 10px;`）：
 
-![布局初步效果](img/02-margin问题.png)
+![给列添加左外边距后的换行问题](img/02-margin问题.png)
 
 如果改成 padding 也会影响到宽度计算。既然要固定宽度，自然想到 `border-box`，宽度计算是加上 padding 不改变整体宽度。假设中间需要留 10px 的宽度，那么两个 Col 组件之间需要各自收缩 5px，这样中间缝隙就有 10px。子元素头尾都收缩了 5px，容器就需要收尾伸长 5px，保证总体宽度不变。
 

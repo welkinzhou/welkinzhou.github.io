@@ -2,9 +2,14 @@
 slug: "mount"
 sidebar_position: 3
 tags: [vue]
+description: "追踪组件 VNode、实例、setup、渲染副作用与 DOM 挂载，对照 Vue 3.5 更新任务。"
 ---
 
 # mount 流程
+
+本文接着看 app.mount，沿用 Vue 3.2 系列片段，以 [v3.2.47 renderer.ts](https://github.com/vuejs/core/blob/v3.2.47/packages/runtime-core/src/renderer.ts) 对照。这里关注同步组件在浏览器中的首次挂载，暂不展开 SSR、异步 setup、Suspense 与 KeepAlive；Vue 3.5 的调度变化在末尾说明。
+
+先区分三个对象：**组件 VNode** 描述要渲染哪个组件和哪些输入；**组件实例** 保存 props、setup 状态、生命周期和 effect；**subTree** 是执行渲染函数得到的 VNode 子树。创建组件 VNode 不等于创建实例，也不等于创建 DOM。
 
 ## 创建 vnode
 
@@ -72,7 +77,7 @@ function _createVNode(
 }
 ```
 
-中间省略的事 type 和 props 的 normalize 处理，例如 class 和 style 可以有多种绑定方式，对象、字符串和数组，将这几种方式绑定值统一形式方便后续处理。同时处理时还需要考虑，这些值中是否有相应式对象，响应式对象不能直接修改，会影响到其他功能，复制一份处理。
+中间省略了 type 和 props 的规范化处理。class、style 支持字符串、对象或数组，渲染前需要统一形式。若规范化要改写传入对象，会先复制相关数据，避免影响其他使用者；这不是说响应式对象在业务代码中不能修改。
 
 接下来就是真正的创建 vnode：
 
@@ -121,7 +126,7 @@ function createBaseVNode(
 }
 ```
 
-vnode 的基本属性就是这些，mount 过程中并没有传入什么属性，可以直接去看 render 过程。
+根 VNode 的 props 来自 createApp 的第二个参数，可能为 null。shapeFlag 表示节点与子节点类别，patchFlag 是编译器提供的动态更新提示，两者用途不同。接下来进入 render。
 
 下面是 render 方法：
 
@@ -210,7 +215,7 @@ const mountComponent: MountComponentFn = (
         startMeasure(instance, `init`)
       }
       // setUp 语法相关处理
-      // 这里设置了 $attrs 的响应式
+      // 初始化 props、attrs 与 slots；$attrs 反映最新值，但不可作为响应式状态侦听
       // 还有 template / render function normalization
       setupComponent(instance)
       if (__DEV__) {
@@ -358,15 +363,8 @@ const setupRenderEffect: SetupRenderEffectFn = (
         const { bm, m, parent } = instance
         const isAsyncWrapperVNode = isAsyncWrapper(initialVNode)
 
-				// toggleRecurse 用来设置当前 effect job 能递归调用自身
-        // 这里设置为 false，不会递归自身
-        // 在组建 update 完成前，阻止掉递归，多次更新一次提交
-        // 默认响应式触发的更新，就不会再次触发自身
-        // By default, a job cannot trigger itself because some built-in method calls,
-        // e.g. Array.prototype.push actually performs reads as well (#1740) which
-        // can lead to confusing infinite loops.
-        // 在 watch 中，可以再次触发
-        // Vue 不推荐在 watch 中更新响应式数据源，可能触发 infinite loop
+        // 在 beforeMount 等钩子执行期间暂时关闭递归更新权限。
+        // 这是重入控制；更新任务的批量去重由 scheduler 负责。
         toggleRecurse(instance, false)
         // beforeMount hook
         if (bm) {
@@ -394,9 +392,8 @@ const setupRenderEffect: SetupRenderEffectFn = (
             startMeasure(instance, `render`)
           }
           // 调用组件 render
-          // render 会返回 children
-          // render 是 compile 后提供的
-          // 需要去看 compile-core
+          // render 返回整个组件的 VNode 子树，不只是 children
+          // 可来自模板预编译，也可由开发者手写
           const subTree = (instance.subTree = renderComponentRoot(instance))
           if (__DEV__) {
             endMeasure(instance, `render`)
@@ -459,7 +456,7 @@ const setupRenderEffect: SetupRenderEffectFn = (
     }
 
     // create reactive effect for rendering
-    // 创建 reactive 数据
+    // 创建渲染副作用，不是在这里把业务数据转换成 reactive
     const effect = (instance.effect = new ReactiveEffect(
       componentUpdateFn,
       () => queueJob(instance.update),
@@ -477,6 +474,54 @@ const setupRenderEffect: SetupRenderEffectFn = (
   }
 ```
 
-到这里 mount 的工作就完成了。大体流程是这样，根据 createApp 传入的 rootComponent，创建 vnode。通过 patch 方法，设置老的 vnode 为 null，将组件渲染到页面。创建 vnode 过程中会，创建组件的 scope，将组件更新的 effects 写入对应 scope。手动触发更新，自动去收集依赖，实现后续响应式。组件的编译部分通过 compile-core 部分实现，我想看的 template 编译和响应式数据绑定，并不在这部分，需要继续翻找。
+## setup 与模板编译在哪里
 
-这里出现了 ReactiveEffect 这个类，这就和响应式相关了。响应式内容比较多，准备单独写。
+setupComponent 先初始化 props 和 slots，再处理有状态组件。setup 的对象返回值被保存，通过 proxyRefs 暴露给渲染访问；返回函数时，直接用作 render。`<script setup>` 是编译时语法，其主体被编译进每个实例执行的 setup，不是运行时再解析 script 标签。
+
+SFC 模板通常由 compiler-sfc 联合 compiler-dom、compiler-core 在构建阶段生成 render。组件尚无 render、存在 template 且运行时注册了编译器时，才走运行时编译路径。见 [component.ts](https://github.com/vuejs/core/blob/v3.2.47/packages/runtime-core/src/component.ts) 与[渲染机制](https://vuejs.org/guide/extras/rendering-mechanism.html)。
+
+attrs 保存未声明为 props 或 emits 的透传属性。它反映最新数据，但不能把 `watch(() => attrs.foo)` 当作正常的响应式侦听来源；需要跟踪变化的输入应声明为 prop。见[透传属性](https://vuejs.org/guide/components/attrs.html#accessing-fallthrough-attributes-in-javascript)。
+
+## 从组件子树到真实 DOM
+
+```text
+根组件 VNode
+  → mountComponent
+  → createComponentInstance（创建实例与 effect scope）
+  → setupComponent（初始化输入、执行 setup、确定 render）
+  → setupRenderEffect
+  → 首次同步调用 update()
+  → renderComponentRoot 得到 subTree
+  → patch(null, subTree)
+  → 元素节点：mountElement → 创建、设置属性、插入 DOM
+  → 子组件：再次进入 mountComponent
+```
+
+首次渲染运行在 ReactiveEffect 中。render 读取响应式数据时建立依赖，后续改变这些数据会通知渲染 effect。scope 在创建组件实例时建立，卸载时停止其中的副作用。
+
+挂载前执行 beforeMount，DOM 插入后调度 mounted。同步子组件的 mounted 先于父组件；异步组件和 Suspense 内的组件不包含在这个保证中。模板引用在挂载前可能为 null，DOM 初始化通常放在 onMounted，资源释放放在 onUnmounted。见[生命周期 API](https://vuejs.org/api/composition-api-lifecycle.html#onmounted)。
+
+## 后续更新与首次挂载的差别
+
+再次渲染时已有 instance.subTree：生成新子树，再执行 `patch(prevTree, nextTree)`。类型相同则复用并更新，类型不同则卸载后重新挂载。数组子节点的变化才进入[列表 diff](./01-diff.md)，并非每次更新都会执行整套 keyed diff。
+
+渲染函数执行范围与 DOM 实际改动范围也不同。patchFlag、静态提升和 block 信息帮助 patch 跳过不需要比较的内容；新 VNode 仍由 render 产生，不能理解为 setter 直接改某个 DOM 属性。
+
+## Vue 3.5 的更新任务
+
+Vue 3.2 的片段把 scheduler 与 scope 传给 ReactiveEffect 构造函数。Vue 3.5.43 在组件 scope 激活期间创建 effect，再设置 scheduler，并区分 update 与 job：
+
+```ts
+// Vue 3.5.43 摘录，省略 scope 激活、调试与递归标志。
+const effect = (instance.effect = new ReactiveEffect(componentUpdateFn))
+const update = (instance.update = effect.run.bind(effect))
+const job = (instance.job = effect.runIfDirty.bind(effect))
+job.i = instance
+job.id = instance.uid
+effect.scheduler = () => queueJob(job)
+update()
+```
+
+首次 update 执行渲染，后续入队的 job 先检查是否需要运行。见 [v3.5.43 renderer.ts](https://github.com/vuejs/core/blob/v3.5.43/packages/runtime-core/src/renderer.ts)，依赖如何变化见[响应式原理](./04-响应式原理.md)。不要混用两版的构造参数。
+
+应用层不需要操作这些内部字段。同步赋值后要读取新 DOM，使用 `await nextTick()`；它等待当前更新队列完成，不承诺浏览器已绘制。队列细节见 [scheduler.ts](https://github.com/vuejs/core/blob/v3.5.43/packages/runtime-core/src/scheduler.ts)。

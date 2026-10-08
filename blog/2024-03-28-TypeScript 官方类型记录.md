@@ -1,4 +1,5 @@
 ---
+title: TypeScript 官方类型记录
 authors: zhouyuan
 tags: [TypeScript]
 ---
@@ -7,7 +8,7 @@ TypeScript 内置了一些类型，入门教程里不一定会细讲。最近翻
 
 <!-- truncate -->
 
-# TypeScript 内置类型记录
+## TypeScript 内置类型记录
 
 这些声明里既有 ES5、ES6 API 的类型，也有不少值得琢磨的写法。我一时也不知道该从哪里继续学 TypeScript，索性边看声明文件边学。因此未有定序，不似别人脉络清晰，偶有所得，翻用自喜。
 

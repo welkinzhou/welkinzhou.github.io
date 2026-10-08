@@ -9,8 +9,6 @@ tags: [Rust, Stack, Heap, 编程原理]
 
 <!-- truncate -->
 
-# Rust Ownership 和堆栈的关系
-
 我觉得 Ownership 有意思的地方，是它把平常不太会留意的内存管理问题，变成了写代码时必须考虑的事情。
 
 要理解这套规则，先回头看一下栈和堆。
