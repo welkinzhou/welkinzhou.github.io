@@ -21,6 +21,11 @@ const config: Config = {
   projectName: "welkinzhou.github.io", // Usually your repo name.
   trailingSlash: false,
 
+  customFields: {
+    // Public feature switch only. Never pass API keys into client configuration.
+    playgroundEnabled: process.env.PLAYGROUND_ENABLED !== "false",
+  },
+
   onBrokenLinks: "throw",
   onDuplicateRoutes: "throw",
   markdown: {

@@ -14,7 +14,7 @@ tags: [Python]
 
 这段代码：
 
-```python
+```python playground=python-basics-07-iteration
 [part.strip().lower() for part in raw.split(",") if part.strip()]
 ```
 
@@ -28,7 +28,7 @@ tags: [Python]
 
 只要 `for` 后面是可迭代对象，就可以使用推导式。常见可迭代对象包括 `list`、`tuple`、`str`、`set`、`dict`、`range`、文件对象和生成器：
 
-```python
+```python playground
 [x * 2 for x in [1, 2, 3]]       # [2, 4, 6]
 [char.upper() for char in "ab"]  # ["A", "B"]
 [x for x in range(5) if x % 2]    # [1, 3]
@@ -36,7 +36,7 @@ tags: [Python]
 
 字典直接遍历时默认遍历的是**键**：
 
-```python
+```python playground
 data = {"a": 1, "b": 2}
 
 [key for key in data]               # ["a", "b"]
@@ -47,7 +47,7 @@ data = {"a": 1, "b": 2}
 
 如果目标结果是字典，要使用**字典推导式**，语法是 `{键表达式: 值表达式 for ...}`：
 
-```python
+```python playground
 data = {"a": 1, "b": 2, "c": 3}
 squared = {key: value * value for key, value in data.items()}
 # {"a": 1, "b": 4, "c": 9}
@@ -58,7 +58,7 @@ even_values = {key: value for key, value in data.items() if value % 2 == 0}
 
 另外还有集合推导式和生成器表达式：
 
-```python
+```python playground
 {x * 2 for x in [1, 2, 2, 3]}      # 集合：{2, 4, 6}
 (x * 2 for x in range(1_000_000))  # 生成器：惰性产生结果
 ```
@@ -67,7 +67,7 @@ even_values = {key: value for key, value in data.items() if value % 2 == 0}
 
 ## 列表推导式：立即创建列表
 
-```python
+```python playground
 squares = [x * x for x in range(5)]
 # [0, 1, 4, 9, 16]
 ```
@@ -76,7 +76,7 @@ squares = [x * x for x in range(5)]
 
 ## 生成器表达式：按需计算
 
-```python
+```python playground
 squares = (x * x for x in range(5))
 
 next(squares)  # 0
@@ -86,7 +86,7 @@ list(squares)  # [4, 9, 16]
 
 生成器表达式不会一次性创建所有结果，只在 `next()` 或 `for` 遍历时生成下一个值。它只能顺序消费，不能通过下标访问，也不能重复遍历已经消费过的内容。
 
-```python
+```python playground
 sum(x * x for x in range(1_000_000))
 ```
 
@@ -96,7 +96,7 @@ sum(x * x for x in range(1_000_000))
 
 包含 `yield` 的函数调用后不会立即执行函数体，而是返回生成器：
 
-```python
+```python playground=python-basics-07-iteration
 def count_up_to(limit: int):
     number = 1
     while number <= limit:
@@ -114,7 +114,7 @@ list(numbers)  # [1, 2, 3]
 - **可迭代对象（iterable）**：可以交给 `for` 遍历，例如列表、元组、字符串、字典、集合。
 - **迭代器（iterator）**：保存遍历状态，可以调用 `next()`，通常只能消费一次。
 
-```python
+```python playground
 items = [1, 2, 3]
 iterator = iter(items)
 
@@ -128,7 +128,7 @@ next(iterator)  # 3
 
 ## 内存与选择
 
-```python
+```python playground=python-basics-07-iteration
 # 立即创建完整列表
 values = [transform(x) for x in data]
 

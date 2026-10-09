@@ -14,7 +14,7 @@ tags: [Python]
 
 `Counter` 是字典的子类，专门用于统计可迭代对象中每个元素出现的次数：
 
-```python
+```python playground
 from collections import Counter
 
 counts = Counter("banana")
@@ -28,14 +28,14 @@ counts.most_common(2) # [("a", 3), ("n", 2)]
 
 也可以直接从字典或关键字参数创建：
 
-```python
+```python playground=python-standard-library-01-collections
 Counter({"red": 2, "blue": 1})
 Counter(red=2, blue=1)
 ```
 
 计数器支持加减和集合式操作：
 
-```python
+```python playground=python-standard-library-01-collections
 a = Counter("aab")
 b = Counter("abc")
 
@@ -47,7 +47,7 @@ a + b  # 计数相加
 
 普通字典按键读取不存在的键会抛 `KeyError`；`defaultdict` 会调用默认工厂函数创建值：
 
-```python
+```python playground
 from collections import defaultdict
 
 numbers_by_type = defaultdict(list)
@@ -61,7 +61,7 @@ numbers_by_type["odd"].append(1)
 
 常见默认工厂：
 
-```python
+```python playground=python-standard-library-01-collections
 counts = defaultdict(int)   # 新键默认 0
 unique = defaultdict(set)   # 新键默认空集合
 queues = defaultdict(list)   # 新键默认空列表
@@ -69,7 +69,7 @@ queues = defaultdict(list)   # 新键默认空列表
 
 注意：访问不存在的键本身就会创建该键：
 
-```python
+```python playground=python-standard-library-01-collections
 values = defaultdict(list)
 print(values["missing"])  # []
 print(values)             # {"missing": []}
@@ -81,7 +81,7 @@ print(values)             # {"missing": []}
 
 `deque` 适合在左右两端高效添加和删除：
 
-```python
+```python playground
 from collections import deque
 
 queue = deque(["a", "b"])
@@ -96,7 +96,7 @@ queue.popleft()          # 左端删除
 
 ## `deque` 的其他 API
 
-```python
+```python playground=python-standard-library-01-collections
 queue = deque([1, 2, 3])
 
 queue.extend([4, 5])
@@ -107,7 +107,7 @@ queue.clear()
 
 `deque(maxlen=3)` 可以创建固定长度的滑动窗口：
 
-```python
+```python playground=python-standard-library-01-collections
 window = deque(maxlen=3)
 for value in [1, 2, 3, 4]:
     window.append(value)
@@ -129,7 +129,7 @@ for value in [1, 2, 3, 4]:
 
 `list` 没有单独的 `prepend` 或 `appendleft` API。头部插入通常写成：
 
-```python
+```python playground
 items = ["a", "b"]
 items.insert(0, "x")
 # ["x", "a", "b"]
@@ -139,7 +139,7 @@ items.insert(0, "x")
 
 如果需要频繁在两端添加和删除，使用 `collections.deque`：
 
-```python
+```python playground
 from collections import deque
 
 items = deque(["a", "b"])
@@ -153,7 +153,7 @@ items.pop()              # 右端删除并返回，O(1)
 
 其他写法的区别：
 
-```python
+```python playground
 items = ["a", "b"]
 new_items = ["x"] + items  # 创建新列表，O(n)，不修改 items
 items[:0] = ["x"]          # 原地头部插入，仍需移动元素，O(n)

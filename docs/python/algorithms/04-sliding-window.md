@@ -28,7 +28,7 @@ tags: [Python]
 
 ## 示例代码：集合版
 
-```python
+```python playground=python-algorithms-04-sliding-window
 def length_of_longest_substring(s: str) -> int:
     window: set[str] = set()
     left = 0
@@ -52,7 +52,7 @@ print(length_of_longest_substring("abcabcbb"))  # 3
 
 可以记录字符最近一次出现的下标，重复时直接把 `left` 跳到更靠右的位置，避免逐个移除：
 
-```python
+```python playground=python-algorithms-sliding-window-fast
 def length_of_longest_substring_fast(s: str) -> int:
     last_index: dict[str, int] = {}
     left = 0

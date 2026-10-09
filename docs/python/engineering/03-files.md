@@ -12,7 +12,7 @@ tags: [Python]
 
 ## 用 `Path` 表示路径
 
-```python
+```python playground
 from pathlib import Path
 
 root = Path("data")
@@ -28,7 +28,7 @@ file_path.parent  # Path("data")
 
 ## 判断和创建路径
 
-```python
+```python playground
 from pathlib import Path
 
 path = Path("data")
@@ -44,7 +44,7 @@ path.mkdir(parents=True, exist_ok=True)
 
 ## 写入和读取文本
 
-```python
+```python playground
 from pathlib import Path
 
 path = Path("data/notes.txt")
@@ -60,7 +60,7 @@ print(text)
 
 ## `with open(...)` 上下文管理器
 
-```python
+```python playground=python-engineering-03-files
 from pathlib import Path
 
 path = Path("data/notes.txt")
@@ -72,7 +72,7 @@ with path.open("r", encoding="utf-8") as file:
 
 `with` 代码块结束时会自动关闭文件，即使代码块中抛出异常也会执行清理。常见模式：
 
-```python
+```python playground=python-engineering-03-files
 with path.open("w", encoding="utf-8") as file:
     file.write("hello\n")
 
@@ -90,7 +90,7 @@ with path.open("a", encoding="utf-8") as file:
 
 ## 遍历目录
 
-```python
+```python playground=python-engineering-03-files
 root = Path("data")
 
 for path in root.iterdir():
@@ -104,7 +104,7 @@ for markdown in root.glob("**/*.md"):
 
 ## 文件操作和异常
 
-```python
+```python playground=python-engineering-03-files
 try:
     text = Path("missing.txt").read_text(encoding="utf-8")
 except FileNotFoundError:
@@ -113,7 +113,7 @@ except FileNotFoundError:
 
 删除文件前可以判断：
 
-```python
+```python playground=python-engineering-03-files
 path = Path("old.txt")
 if path.exists():
     path.unlink()

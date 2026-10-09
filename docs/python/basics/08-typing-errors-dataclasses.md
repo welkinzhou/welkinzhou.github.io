@@ -14,7 +14,7 @@ tags: [Python]
 
 类型标注用于表达函数参数、返回值和变量的预期类型，主要帮助编辑器、静态检查工具和读代码的人；Python 默认不会因为类型标注不匹配而自动阻止运行。
 
-```python
+```python playground=python-basics-typing-average
 
 def average(values: list[float]) -> float:
     return sum(values) / len(values)
@@ -26,7 +26,7 @@ enabled: bool = True
 
 常见复合类型：
 
-```python
+```python playground=python-basics-08-typing-errors-dataclasses
 from typing import Any
 
 metadata: dict[str, str | int] = {"source": "a.md", "page": 3}
@@ -41,7 +41,7 @@ unknown: Any = get_external_value()
 
 `None` 表示没有值、缺失或尚未产生结果。判断时使用 `is None` / `is not None`，不要使用 `== None`：
 
-```python
+```python playground=python-basics-08-typing-errors-dataclasses
 value = lookup("missing")
 
 if value is None:
@@ -50,7 +50,7 @@ if value is None:
 
 类型标注中可以写：
 
-```python
+```python playground=python-basics-typing-find-name
 def find_name(user_id: int) -> str | None:
     if user_id == 1:
         return "Ada"
@@ -63,7 +63,7 @@ def find_name(user_id: int) -> str | None:
 
 可能失败的代码放在 `try` 中，用具体异常类型处理：
 
-```python
+```python playground
 try:
     number = int("abc")
 except ValueError:
@@ -72,7 +72,7 @@ except ValueError:
 
 完整结构还可以包含 `else` 和 `finally`：
 
-```python
+```python playground=python-basics-08-typing-errors-dataclasses
 try:
     value = int(text)
 except ValueError as error:
@@ -93,7 +93,7 @@ finally:
 
 用 `raise` 表示参数或状态不符合要求：
 
-```python
+```python playground=python-basics-typing-divide
 def divide(a: float, b: float) -> float:
     if b == 0:
         raise ValueError("除数不能为 0")
@@ -102,7 +102,7 @@ def divide(a: float, b: float) -> float:
 
 自定义异常可以继承 `Exception`：
 
-```python
+```python playground=python-basics-typing-custom-error
 class ConfigurationError(Exception):
     pass
 ```
@@ -111,7 +111,7 @@ class ConfigurationError(Exception):
 
 `dataclass` 根据字段声明自动生成初始化方法、比较和表示方法，适合承载结构化数据：
 
-```python
+```python playground
 from dataclasses import dataclass
 
 @dataclass
@@ -128,13 +128,13 @@ print(doc)
 
 默认情况下字段仍然可修改：
 
-```python
+```python playground=python-basics-08-typing-errors-dataclasses
 doc.page = 4
 ```
 
 如果希望阻止字段重新赋值，可以使用 `frozen=True`；它不会冻结字段内部的可变对象：
 
-```python
+```python playground=python-basics-dataclass-point-frozen
 @dataclass(frozen=True)
 class Point:
     x: int
@@ -145,7 +145,7 @@ class Point:
 
 `dataclass` 会拒绝直接使用列表或字典这样的默认值；需要为每个实例分别创建对象。使用 `field(default_factory=...)`：
 
-```python
+```python playground=python-basics-dataclass-user
 from dataclasses import dataclass, field
 
 @dataclass
@@ -160,7 +160,7 @@ class User:
 
 `dataclass` 默认生成的 `__init__` 支持位置参数和关键字参数：
 
-```python
+```python playground=python-basics-dataclass-point-args
 from dataclasses import dataclass
 
 @dataclass
@@ -176,14 +176,14 @@ p3 = Point(10, y=20, label="origin")  # 可以混用
 
 位置参数必须写在关键字参数前面；同一个参数不能重复传递：
 
-```python
+```python playground
 # Point(x=10, 20)       # SyntaxError：位置参数不能放在关键字参数后
 # Point(10, x=20, y=30) # TypeError：x 被传了两次
 ```
 
 `@dataclass(frozen=True)` 会阻止实例化完成后给字段重新赋值：
 
-```python
+```python playground=python-basics-dataclass-point-frozen-instance
 @dataclass(frozen=True)
 class Point:
     x: int
@@ -195,7 +195,7 @@ p = Point(1, 2)
 
 它是“字段不能重新绑定”，不是深度冻结。若字段本身是可变对象，内部内容仍可能改变：
 
-```python
+```python playground=python-basics-dataclass-config
 @dataclass(frozen=True)
 class Config:
     tags: list[str]
@@ -211,7 +211,7 @@ config.tags.append("rag")  # 可以修改列表内容
 
 默认情况下，属性访问和下标访问不能混用：
 
-```python
+```python playground
 from dataclasses import dataclass
 
 @dataclass
@@ -226,7 +226,7 @@ p.x = 10       # 正确：访问对象属性
 
 字典则相反：
 
-```python
+```python playground
 data = {"x": 1}
 data["x"] = 10  # 正确：访问字典键
 # data.x = 10    # AttributeError：x 不是字典属性
@@ -240,7 +240,7 @@ data["x"] = 10  # 正确：访问字典键
 
 自定义类可以实现这两个方法，从而同时支持两种写法：
 
-```python
+```python playground=python-basics-08-typing-errors-dataclasses
 class Config:
     def __init__(self):
         self.x = 1

@@ -12,7 +12,7 @@ tags: [Python]
 
 ## 增删改查
 
-```python
+```python playground
 items = ["a", "b", "c"]
 
 items[0] = "A"          # 修改
@@ -29,7 +29,7 @@ items.remove("x")      # 删除第一个值为 "x" 的元素
 
 ## 切片和切片赋值
 
-```python
+```python playground
 nums = [0, 1, 2, 3, 4]
 nums[1:4]   # [1, 2, 3]
 nums[:3]    # [0, 1, 2]
@@ -45,7 +45,7 @@ nums[1:3] = [10, 11, 12]
 
 ## 排序和反转
 
-```python
+```python playground
 nums = [3, 1, 2]
 new_nums = sorted(nums)  # 返回新列表，nums 不变
 nums.sort()              # 原地排序，返回 None
@@ -62,7 +62,7 @@ sorted(words, key=len)    # ["a", "bb", "ccc"]
 
 列表是可变对象。简单赋值不会复制：
 
-```python
+```python playground
 a = [1, 2]
 b = a
 b.append(3)
@@ -71,7 +71,7 @@ print(a)  # [1, 2, 3]
 
 复制一层可以使用切片、`copy()` 或 `list()`：
 
-```python
+```python playground
 a = [1, 2]
 b = a.copy()
 b.append(3)
@@ -80,7 +80,7 @@ print(a)  # [1, 2]
 
 这些是浅拷贝，嵌套列表的内层对象仍可能共享。嵌套结构需要完全复制时使用 `copy.deepcopy`。
 
-```python
+```python playground
 import copy
 
 a = [[1], [2]]
@@ -93,7 +93,7 @@ print(a)  # [[1], [2]]
 
 `append`、`extend`、`insert`、`sort`、`reverse` 都是原地修改，返回值是 `None`：
 
-```python
+```python playground
 nums = [3, 1, 2]
 result = nums.sort()
 print(result)  # None

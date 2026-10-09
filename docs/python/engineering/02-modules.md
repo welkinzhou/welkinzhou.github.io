@@ -22,7 +22,7 @@ project/
 
 `math_utils.py`：
 
-```python
+```python playground=python-engineering-module-definition
 PI = 3.14159
 
 
@@ -32,7 +32,7 @@ def square(value: int) -> int:
 
 `main.py` 可以导入它：
 
-```python
+```python playground=python-engineering-02-modules
 import math_utils
 
 print(math_utils.PI)
@@ -41,7 +41,7 @@ print(math_utils.square(4))
 
 也可以导入指定名称：
 
-```python
+```python playground=python-engineering-02-modules
 from math_utils import square
 
 print(square(4))
@@ -49,7 +49,7 @@ print(square(4))
 
 使用别名：
 
-```python
+```python playground=python-engineering-02-modules
 import math_utils as mu
 from math_utils import square as sq
 ```
@@ -58,7 +58,7 @@ from math_utils import square as sq
 
 如果 `math_utils.py` 里直接写：
 
-```python
+```python playground
 print("module loaded")
 ```
 
@@ -70,7 +70,7 @@ print("module loaded")
 
 推荐写法：
 
-```python
+```python playground=python-engineering-02-modules
 # math_utils.py
 
 def square(value: int) -> int:
@@ -93,7 +93,7 @@ python math_utils.py
 
 此时该文件是入口文件，`__name__` 等于 `"__main__"`，会执行 `main()`。
 
-```python
+```python playground=python-engineering-02-modules
 import math_utils
 ```
 
@@ -116,14 +116,14 @@ project/
 
 导入包内模块：
 
-```python
+```python playground=python-engineering-02-modules
 from utils.text import normalize
 from utils import numbers
 ```
 
 `__init__.py` 可以为空，也可以暴露常用接口：
 
-```python
+```python playground=python-engineering-02-package-init
 # utils/__init__.py
 from .text import normalize
 
@@ -132,7 +132,7 @@ __all__ = ["normalize"]
 
 之后可以写：
 
-```python
+```python playground=python-engineering-02-modules
 from utils import normalize
 ```
 
@@ -140,7 +140,7 @@ from utils import normalize
 
 包内模块可以使用相对导入：
 
-```python
+```python playground=python-engineering-02-relative-import
 # utils/report.py
 from .text import normalize
 ```

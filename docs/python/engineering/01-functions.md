@@ -12,7 +12,7 @@ tags: [Python]
 
 ## 位置参数和关键字参数
 
-```python
+```python playground=python-engineering-01-functions
 def connect(host: str, port: int, timeout: float = 5.0):
     return f"{host}:{port}, timeout={timeout}"
 
@@ -25,7 +25,7 @@ connect("localhost", port=8000, timeout=10)  # 混用
 
 ## `*args`：接收任意多个位置参数
 
-```python
+```python playground=python-engineering-01-functions
 def total(*numbers: int) -> int:
     return sum(numbers)
 
@@ -34,13 +34,13 @@ total(1, 2, 3)  # 6
 
 函数内部的 `numbers` 是一个元组：
 
-```python
+```python playground
 # numbers == (1, 2, 3)
 ```
 
 ## `**kwargs`：接收任意多个关键字参数
 
-```python
+```python playground=python-engineering-01-functions
 def build_config(**options: str) -> dict[str, str]:
     return options
 
@@ -54,7 +54,7 @@ build_config(model="gpt", region="cn")
 
 在参数列表中放一个单独的 `*`，后面的参数必须使用关键字传递：
 
-```python
+```python playground
 def request(url: str, *, timeout: float = 5.0, retries: int = 2):
     ...
 
@@ -68,7 +68,7 @@ request("https://example.com", timeout=10)
 
 在参数列表中使用 `/`，前面的参数只能按位置传递：
 
-```python
+```python playground=python-engineering-01-functions
 def repeat(value, count, /, separator=" "):
     return separator.join([value] * count)
 
@@ -82,7 +82,7 @@ repeat("a", 3)
 
 调用函数时，列表或元组前加 `*`，字典前加 `**`：
 
-```python
+```python playground=python-engineering-01-functions
 def connect(host: str, port: int, timeout: float):
     return host, port, timeout
 
@@ -95,7 +95,7 @@ connect(**options)
 
 构建新字典时也可以合并：
 
-```python
+```python playground
 defaults = {"timeout": 5, "retries": 2}
 custom = {"timeout": 10}
 config = {**defaults, **custom}
@@ -108,7 +108,7 @@ config = {**defaults, **custom}
 
 不要把列表或字典直接作为默认参数：
 
-```python
+```python playground=python-engineering-add-item-shared
 # 不推荐
 
 def add_item(item, items=[]):
@@ -118,7 +118,7 @@ def add_item(item, items=[]):
 
 默认列表只会创建一次，多个调用会共享它。正确写法是使用 `None`：
 
-```python
+```python playground=python-engineering-add-item
 def add_item(item: str, items: list[str] | None = None) -> list[str]:
     if items is None:
         items = []

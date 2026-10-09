@@ -12,7 +12,7 @@ tags: [Python]
 
 ## `enumerate`：同时获取下标和值
 
-```python
+```python playground
 names = ["Ada", "Bob"]
 
 for index, name in enumerate(names):
@@ -24,13 +24,13 @@ for index, name in enumerate(names, start=1):
 
 `enumerate` 返回一个迭代器，不是列表；需要列表时显式转换：
 
-```python
+```python playground
 list(enumerate(["a", "b"]))  # [(0, "a"), (1, "b")]
 ```
 
 ## `zip`：按位置组合多个可迭代对象
 
-```python
+```python playground
 names = ["Ada", "Bob"]
 scores = [90, 85]
 
@@ -43,13 +43,13 @@ list(zip(names, scores))
 
 `zip` 默认以最短对象为准，多出来的元素会被忽略。需要严格检查长度时，Python 3.10+ 可以使用 `strict=True`：
 
-```python
+```python playground
 list(zip([1, 2], ["a"], strict=True))  # ValueError
 ```
 
 ## `map`：对每个元素应用函数
 
-```python
+```python playground
 numbers = ["1", "2", "3"]
 converted = map(int, numbers)
 
@@ -58,13 +58,13 @@ list(converted)  # [1, 2, 3]
 
 `map` 返回惰性迭代器，只在遍历时计算。列表推导式通常更直观：
 
-```python
+```python playground=python-basics-06-builtins
 [int(number) for number in numbers]
 ```
 
 ## `filter`：保留满足条件的元素
 
-```python
+```python playground=python-basics-06-builtins
 numbers = [1, 2, 3, 4]
 evens = filter(lambda number: number % 2 == 0, numbers)
 
@@ -73,13 +73,13 @@ list(evens)  # [2, 4]
 
 `filter` 也返回惰性迭代器；复杂条件通常使用列表推导式更易读：
 
-```python
+```python playground=python-basics-06-builtins-filter
 [number for number in numbers if number % 2 == 0]
 ```
 
 ## `any` 和 `all`
 
-```python
+```python playground
 flags = [True, False, True]
 
 any(flags)  # True，只要有一个为真
@@ -88,7 +88,7 @@ all(flags)  # False，必须全部为真
 
 它们会短路：`any` 找到真值后停止，`all` 找到假值后停止。常见写法：
 
-```python
+```python playground
 scores = [80, 92, 76]
 any(score >= 90 for score in scores)  # True
 all(score >= 60 for score in scores)  # True
@@ -96,7 +96,7 @@ all(score >= 60 for score in scores)  # True
 
 ## `sorted`：返回排序后的新列表
 
-```python
+```python playground
 words = ["ccc", "a", "bb"]
 
 sorted(words)                    # 按字典序
@@ -108,7 +108,7 @@ sorted(words, key=len, reverse=True)  # 长度降序
 
 ## 返回值速查
 
-```python
+```python playground=python-basics-06-builtins
 enumerate(items)  # 迭代器
 zip(a, b)         # 迭代器
 map(func, items)  # 迭代器
@@ -120,7 +120,7 @@ sorted(iterable)  # 新列表
 
 迭代器通常只能消费一次：
 
-```python
+```python playground
 iterator = map(int, ["1", "2"])
 list(iterator)  # [1, 2]
 list(iterator)  # []

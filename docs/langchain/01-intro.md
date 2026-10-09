@@ -16,7 +16,7 @@ tags: [Python, LangChain, LangGraph, RAG]
 
 接下来的文章会以搭建一个 RAG 知识库问答程序为主题，用这个场景贯穿学习过程。我们先写处理数据的节点，再接上检索与生成，把这些步骤组织成 Workflow，最后让 Agent 调用检索工具。每一步都复用前面的代码，逐步理解程序如何执行、数据如何流动，以及什么时候需要引入更复杂的流程。
 
-这里的 Node 指 LangGraph 的计算节点，通常就是一个 Python 函数。示例全部使用 Python。
+这里的 Node 指 LangGraph 的计算节点，通常就是一个 Python 函数。示例全部使用 Python。部分纯 Python 函数、Runnable 与 LCEL 示例带有浏览器 Playground，可以直接试跑；首次运行时会下载 Python 运行环境，执行过程不调用 API。Node、Graph 和 checkpoint 示例的完整代码可下载后在本地运行。
 
 <details>
 <summary>补充说明：LangChain 生态分层（选读）</summary>

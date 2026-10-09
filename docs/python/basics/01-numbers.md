@@ -12,35 +12,35 @@ tags: [Python]
 
 ## 除法和整除
 
-```python
+```python playground
 7 / 2   # 3.5，普通除法，结果通常是 float
 7 // 2  # 3，向下取整除法
 ```
 
 `//` 的含义是 floor division，结果向负无穷方向取整，不是简单截断：
 
-```python
+```python playground
 7 // 2    # 3
 -7 // 2   # -4
 ```
 
 如果想向 0 截断，可以使用 `int`（对浮点数也适用）：
 
-```python
+```python playground
 int(7 / 2)    # 3
 int(-7 / 2)   # -3
 ```
 
 注意 `int` 是截断，不是四舍五入：
 
-```python
+```python playground
 int(3.9)   # 3
 int(-3.9)  # -3
 ```
 
 ## 四舍五入
 
-```python
+```python playground
 round(3.6)   # 4
 round(3.4)   # 3
 round(3.14159, 2)  # 3.14
@@ -48,7 +48,7 @@ round(3.14159, 2)  # 3.14
 
 Python 的 `round` 使用“舍入到偶数”规则处理正好在中间的情况：
 
-```python
+```python playground
 round(2.5)  # 2
 round(3.5)  # 4
 ```
@@ -57,19 +57,19 @@ round(3.5)  # 4
 
 ## 取余 `%`
 
-```python
+```python playground
 7 % 2   # 1
 ```
 
 Python 满足：
 
-```python
+```python playground=python-basics-01-numbers
 a == (a // b) * b + (a % b)
 ```
 
 取余结果的符号与除数 `b` 相同：
 
-```python
+```python playground
 7 % 3    # 1
 -7 % 3   # 2
 7 % -3   # -2
@@ -81,14 +81,14 @@ a == (a // b) * b + (a % b)
 
 `divmod(a, b)` 一次返回整除结果和余数：
 
-```python
+```python playground
 quotient, remainder = divmod(17, 5)
 # quotient == 3, remainder == 2
 ```
 
 适合时钟换算、分页和进制拆分：
 
-```python
+```python playground
 hours, minutes = divmod(135, 60)
 # 2 小时 15 分钟
 ```
@@ -97,7 +97,7 @@ hours, minutes = divmod(135, 60)
 
 Python 支持整数位运算：
 
-```python
+```python playground
 a = 6  # 二进制 110
 b = 3  # 二进制 011
 
@@ -120,7 +120,7 @@ a >> 1  # 右移一位，结果 3
 
 常见用途是位掩码：
 
-```python
+```python playground
 READ = 1      # 001
 WRITE = 2     # 010
 EXECUTE = 4   # 100

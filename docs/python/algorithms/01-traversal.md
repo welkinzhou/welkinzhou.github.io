@@ -22,7 +22,7 @@ tags: [Python]
 
 ## 示例代码
 
-```python
+```python playground=python-algorithms-01-traversal
 def find_max(nums: list[int]) -> int:
     if not nums:
         raise ValueError("nums 不能为空")

@@ -14,7 +14,7 @@ tags: [Python]
 
 给定一个升序排列的整数列表和目标值，返回目标值的下标；如果不存在，返回 `-1`。
 
-```python
+```python playground
 nums = [1, 3, 5, 7, 9]
 target = 7
 # 返回 3
@@ -32,7 +32,7 @@ target = 7
 
 ## 示例代码
 
-```python
+```python playground=python-algorithms-05-binary-search
 def binary_search(nums: list[int], target: int) -> int:
     left = 0
     right = len(nums) - 1
@@ -64,7 +64,7 @@ print(binary_search([1, 3, 5, 7, 9], 4))  # -1
 
 Python 中也可以使用标准库 `bisect` 查找插入位置：
 
-```python
+```python playground
 from bisect import bisect_left
 
 nums = [1, 3, 5, 7, 9]
@@ -84,7 +84,7 @@ if index < len(nums) and nums[index] == 7:
 
 区间包含左右端点，初始化为 `left = 0`、`right = n - 1`。只要 `left <= right`，区间就可能还有元素；当 `left > right` 时区间为空。
 
-```python
+```python playground=python-algorithms-binary-search-closed
 def search_closed(nums: list[int], target: int) -> int:
     left, right = 0, len(nums) - 1
 
@@ -109,7 +109,7 @@ def search_closed(nums: list[int], target: int) -> int:
 
 这种写法特别适合查找“第一个满足条件的位置”（lower bound）：
 
-```python
+```python playground=python-algorithms-binary-search-lower-bound
 def lower_bound(nums: list[int], target: int) -> int:
     left, right = 0, len(nums)
 
@@ -128,7 +128,7 @@ def lower_bound(nums: list[int], target: int) -> int:
 
 如果要判断目标是否真的存在：
 
-```python
+```python playground=python-algorithms-binary-search-half-open
 def search_half_open(nums: list[int], target: int) -> int:
     index = lower_bound(nums, target)
     if index < len(nums) and nums[index] == target:

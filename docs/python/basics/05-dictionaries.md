@@ -12,7 +12,7 @@ tags: [Python]
 
 ## 创建和读取
 
-```python
+```python playground
 user = {"name": "Ada", "age": 36}
 
 user["name"]          # "Ada"
@@ -25,7 +25,7 @@ user.get("email", "未填写")  # "未填写"
 
 ## 添加和更新
 
-```python
+```python playground=python-basics-05-dictionaries
 user["city"] = "Beijing"       # 添加新键
 user["age"] = 37                # 更新已有键
 
@@ -35,7 +35,7 @@ user.update({"age": 38, "job": "engineer"})
 
 `update` 也可以接收关键字参数：
 
-```python
+```python playground=python-basics-05-dictionaries
 user.update(city="Shanghai", active=True)
 ```
 
@@ -45,7 +45,7 @@ user.update(city="Shanghai", active=True)
 
 `setdefault(key, default)`：键已存在时返回原值，不覆盖；键不存在时写入默认值并返回它。
 
-```python
+```python playground
 config = {"timeout": 30}
 
 config.setdefault("timeout", 60)  # 返回 30，原值不变
@@ -57,7 +57,7 @@ print(config)
 
 它适合“如果没有就初始化”的场景，例如按类别分组：
 
-```python
+```python playground
 groups: dict[str, list[str]] = {}
 
 for name, category in [("a", "x"), ("b", "y"), ("c", "x")]:
@@ -68,7 +68,7 @@ for name, category in [("a", "x"), ("b", "y"), ("c", "x")]:
 
 ## 遍历键、值和键值对
 
-```python
+```python playground
 scores = {"math": 90, "english": 85}
 
 for key in scores.keys():
@@ -83,7 +83,7 @@ for key, value in scores.items():
 
 实际代码中通常可以直接写 `for key in scores`，效果等同于遍历键。`keys()`、`values()` 和 `items()` 返回动态视图，不是独立列表；如果需要列表，可以显式转换：
 
-```python
+```python playground=python-basics-05-dictionaries
 list(scores.keys())
 list(scores.values())
 list(scores.items())
@@ -91,7 +91,7 @@ list(scores.items())
 
 ## 删除和清空
 
-```python
+```python playground
 user = {"name": "Ada", "age": 36, "city": "Beijing"}
 
 age = user.pop("age")              # 删除并返回值
@@ -105,7 +105,7 @@ user.clear()                        # 清空字典
 
 ## 字典推导式
 
-```python
+```python playground
 scores = {"math": 90, "english": 85, "art": 92}
 passed = {subject: score for subject, score in scores.items() if score >= 90}
 # {"math": 90, "art": 92}
@@ -120,13 +120,13 @@ passed = {subject: score for subject, score in scores.items() if score >= 90}
 
 ## 补充：链式调用中的返回值与原地修改
 
-```python
+```python playground=python-basics-05-dictionaries
 groups.setdefault(category, []).append(name)
 ```
 
 这句可以拆成：
 
-```python
+```python playground=python-basics-05-dictionaries
 bucket = groups.setdefault(category, [])
 bucket.append(name)
 ```
@@ -140,14 +140,14 @@ bucket.append(name)
 
 但 `list.append` 是原地修改方法，修改列表后返回 `None`：
 
-```python
+```python playground=python-basics-05-dictionaries
 result = bucket.append(name)
 print(result)  # None
 ```
 
 所以要区分：
 
-```python
+```python playground=python-basics-05-dictionaries
 returned_list = groups.setdefault(category, [])  # 返回列表
 returned_value = returned_list.append(name)       # 返回 None
 ```
@@ -156,7 +156,7 @@ returned_value = returned_list.append(name)       # 返回 None
 
 常见 API 的返回值规律：
 
-```python
+```python playground=python-basics-05-dictionaries
 new_list = sorted(nums)  # 返回新列表
 result = nums.sort()     # 原地排序，返回 None
 item = nums.pop()        # 删除并返回元素

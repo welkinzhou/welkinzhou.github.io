@@ -26,7 +26,7 @@ tags: [Python]
 
 ### 示例代码
 
-```python
+```python playground=python-algorithms-03-two-pointers
 def remove_element(nums: list[int], val: int) -> int:
     write = 0
 
@@ -65,7 +65,7 @@ print(nums[:k]) # [2, 2]
 
 ### 示例代码
 
-```python
+```python playground
 def move_zeroes(nums: list[int]) -> None:
     write = 0
 
@@ -110,7 +110,7 @@ print(nums)  # [1, 3, 12, 0, 0]
 
 ### 示例代码
 
-```python
+```python playground=python-algorithms-03-two-pointers
 def merge(nums1: list[int], m: int, nums2: list[int], n: int) -> None:
     i = m - 1          # nums1 有效数据的末尾
     j = n - 1          # nums2 的末尾

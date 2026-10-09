@@ -1,0 +1,281 @@
+{
+  "python-algorithms-01-traversal": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "nums = [3, 1, 8, 2]\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-algorithms-02-hashing": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "nums = [2, 1, 2, 3, 1, 2]\ntarget = 9\ns, t = \"anagram\", \"nagaram\"\ntext = \"abccccdd\"\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-algorithms-03-two-pointers": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "nums = [3, 2, 2, 3]\nval = 3\nm, n = 3, 3\nnums2 = [2, 5, 6]\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-algorithms-04-sliding-window": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "s = \"abcabcbb\"\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-algorithms-05-binary-search": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "nums = [1, 3, 5, 7, 9]\ntarget = 7\ndef lower_bound(nums, target):\n    from bisect import bisect_left\n    return bisect_left(nums, target)\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-algorithms-06-prefix-sums": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "nums = [2, 4, 1, 3, 5]\nleft, right = 1, 3\nprefix = [0, 2, 6, 7, 10, 15]\ndef query(left, right):\n    return sum(nums[left:right + 1])\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-basics-01-numbers": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "a, b = 6, 3\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-basics-04-tuples-sets": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "values = [3, 1, 8]\nstep1 = dict.fromkeys([1, 2, 2, 3, 1])\nitems = [1, 2, 2, 3, 1]\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-basics-05-dictionaries": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "user = {\"name\": \"Ada\", \"age\": 36}\nscores = {\"math\": 90, \"english\": 85}\ngroups = {}\ncategory, name = \"x\", \"Ada\"\nbucket = []\ndata = {\"key\": 1}\nnums = [3, 1, 2]\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-basics-06-builtins": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "numbers = [\"1\", \"2\", \"3\"]\nnumber = 2\na, b = [1, 2], [\"a\", \"b\"]\nitems = [1, 2, 3]\nfunc = abs\niterable = [1, 2, 3]\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-basics-07-iteration": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "raw = \"  red, green,, BLUE  \"\nlimit = 3\ndata = [1, 2, 3]\ndef transform(value):\n    return value * 2\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-basics-08-typing-errors-dataclasses": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "from dataclasses import dataclass, field\nvalues = [1.0, 2.0, 3.0]\ndef get_external_value():\n    return \"value\"\ndef lookup(user_id):\n    return \"Ada\" if user_id == 1 else None\nuser_id = 1\ntext = \"42\"\na, b = 6.0, 3.0\nclass Document:\n    def __init__(self, *args, **kwargs):\n        self.text = args[0] if args else kwargs.get(\"text\", \"\")\n        self.source = args[1] if len(args) > 1 else kwargs.get(\"source\", \"guide.md\")\n        self.page = args[2] if len(args) > 2 else kwargs.get(\"page\")\ndoc = Document(\"内容\", \"guide.md\", 3)\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-engineering-01-functions": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "host, port, timeout = \"localhost\", 8000, 5.0\nnumbers = (1, 2, 3)\noptions = {\"model\": \"gpt\", \"region\": \"cn\"}\ncount, separator, value = 3, \" \", \"a\"\nargs = (\"localhost\", 8000, 5.0)\nitems = []\nitem = \"x\"\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-engineering-02-modules": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\n",
+      "math_utils.py": "PI = 3.14159\n\ndef square(value: int) -> int:\n    return value * value\n",
+      "utils/__init__.py": "from .text import normalize\n\n__all__ = [\"normalize\"]\n",
+      "utils/text.py": "def normalize(text: str) -> str:\n    return \" \".join(text.split())\n",
+      "utils/numbers.py": "def clamp(value: int, minimum: int, maximum: int) -> int:\n    return max(minimum, min(value, maximum))\n",
+      "utils/report.py": "from .text import normalize\n\ndef make_report(text: str) -> str:\n    return normalize(text)\n"
+    }
+  },
+  "python-engineering-03-files": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "from pathlib import Path\nroot = Path(\"data\")\nroot.mkdir(parents=True, exist_ok=True)\npath = Path(\"data/notes.txt\")\nif not path.exists():\n    path.write_text(\"第一行\\n第二行\\n\", encoding=\"utf-8\")\n# __PLAYGROUND_CODE__\n",
+      "data/notes.txt": "第一行\n第二行\n"
+    }
+  },
+  "python-standard-library-01-collections": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "from collections import Counter, defaultdict, deque\nqueue = deque([\"a\", \"b\"])\nitems = [\"a\", \"b\"]\na, b = Counter(\"aab\"), Counter(\"abc\")\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-standard-library-02-heapq-bisect": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "import heapq\nimport bisect\nheap = [5, 2, 8]\nheapq.heapify(heap)\nnums = [1, 3, 3, 5, 8]\nscores = [5, 1, 9, 3, 7]\nitems = [(\"a\", 5), (\"b\", 9), (\"c\", 3)]\nvalues = [5, 1, 9, 3]\nk = 2\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-standard-library-03-complexity": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "import heapq\nfrom collections import deque\nitems = [3, 1, 2]\nqueue = deque(items)\nheap = [1, 3, 2]\nheapq.heapify(heap)\nk, x, xs = 2, 1, [3, 1, 2]\nindex, key, value = 0, \"key\", 1\ndata = {\"key\": 1}\na, b = [1, 2], [2, 3]\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-engineering-02-package-init": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "import utils\nprint(utils.normalize(\"  RAG   怎么更新？  \"))\n",
+      "utils/__init__.py": "# __PLAYGROUND_CODE__\n",
+      "utils/text.py": "def normalize(text: str) -> str:\n    return \" \".join(text.split())\n"
+    }
+  },
+  "python-engineering-02-relative-import": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "from utils.report import normalize\nprint(normalize(\"  RAG   怎么更新？  \"))\n",
+      "utils/__init__.py": "",
+      "utils/report.py": "# __PLAYGROUND_CODE__\n",
+      "utils/text.py": "def normalize(text: str) -> str:\n    return \" \".join(text.split())\n"
+    }
+  },
+  "python-basics-06-builtins-filter": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "numbers = [1, 2, 3, 4]\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-algorithms-sliding-window-fast": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nprint(length_of_longest_substring_fast(\"abcabcbb\"))\n"
+    }
+  },
+  "python-algorithms-binary-search-closed": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nprint(search_closed([1, 3, 5, 7, 9], 7))\n"
+    }
+  },
+  "python-algorithms-binary-search-lower-bound": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nprint(lower_bound([1, 3, 5, 7, 9], 7))\n"
+    }
+  },
+  "python-algorithms-binary-search-half-open": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "def lower_bound(nums, target):\n    from bisect import bisect_left\n    return bisect_left(nums, target)\n# __PLAYGROUND_CODE__\nprint(search_half_open([1, 3, 5, 7, 9], 7))\n"
+    }
+  },
+  "python-basics-tuples-min-max": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nprint(min_max([3, 1, 8]))\n"
+    }
+  },
+  "python-basics-typing-average": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nprint(average([1.0, 2.0, 3.0]))\n"
+    }
+  },
+  "python-basics-typing-find-name": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nprint(find_name(1))\n"
+    }
+  },
+  "python-basics-typing-divide": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nprint(divide(6, 3))\n"
+    }
+  },
+  "python-basics-typing-custom-error": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nprint(ConfigurationError(\"配置无效\"))\n"
+    }
+  },
+  "python-engineering-add-item": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nprint(add_item(\"a\"))\nprint(add_item(\"b\"))\n"
+    }
+  },
+  "python-engineering-module-definition": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "import math_utils\nprint(math_utils.square(4))\n",
+      "math_utils.py": "# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-complexity-list": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "items = [3, 1, 2]\nindex, x = 0, 9\na, b = 0, 2\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-complexity-dict-set": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "data = {\"key\": 1}\nkey, value = \"key\", 2\nitems = {1, 2, 3}\nitem = 2\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-complexity-deque": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "from collections import deque\nqueue = deque([1, 2, 3])\nindex, x = 1, 9\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-complexity-heap": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "import heapq\nitems = [3, 1, 2]\nheap = [3, 1, 2]\nheapq.heapify(heap)\nk, xs, x = 2, [3, 1, 2], 1\n# __PLAYGROUND_CODE__\n"
+    }
+  },
+  "python-basics-dataclass-point-frozen": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "from dataclasses import dataclass, field\n# __PLAYGROUND_CODE__\nprint(Point(1, 2))\n"
+    }
+  },
+  "python-basics-dataclass-user": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nuser = User(\"Ada\")\nprint(user)\n"
+    }
+  },
+  "python-basics-dataclass-point-args": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nprint(p1, p2, p3)\n"
+    }
+  },
+  "python-basics-dataclass-point-frozen-instance": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "from dataclasses import dataclass, field\n# __PLAYGROUND_CODE__\nprint(p)\n"
+    }
+  },
+  "python-basics-dataclass-config": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "from dataclasses import dataclass, field\n# __PLAYGROUND_CODE__\nprint(config.tags)\n"
+    }
+  },
+  "python-engineering-add-item-shared": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "# __PLAYGROUND_CODE__\nprint(add_item(\"a\"))\nprint(add_item(\"b\"))\n"
+    }
+  },
+  "langchain-python": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "from helpers import clean_query\n# __PLAYGROUND_CODE__\n",
+      "helpers.py": "def clean_query(text: str) -> str:\n    return \" \".join(text.split())\n"
+    }
+  },
+  "langchain-runnable": {
+    "entry": "main.py",
+    "files": {
+      "main.py": "from helpers import RunnableLambda, clean_query, add_keywords, normalize_query\n# __PLAYGROUND_CODE__\n",
+      "helpers.py": "from langchain_core.runnables import RunnableLambda\n\ndef clean_query(text: str) -> str:\n    return \" \".join(text.split())\n\ndef add_keywords(query: str, hint: str = \"索引版本\") -> str:\n    return f\"{query} {hint}\"\n\nnormalize_query = RunnableLambda(clean_query)\n"
+    },
+    "packages": "langchain"
+  }
+}

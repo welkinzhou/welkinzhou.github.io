@@ -14,7 +14,7 @@ tags: [Python]
 
 ## `list`
 
-```python
+```python playground=python-complexity-list
 items[index]       # O(1)，按下标读取
 items.append(x)    # 均摊 O(1)，末尾添加
 items.pop()        # O(1)，末尾删除
@@ -31,7 +31,7 @@ items.sort()       # O(n log n)
 
 哈希表的查找、插入和删除平均为 O(1)：
 
-```python
+```python playground=python-complexity-dict-set
 key in data       # dict/set 平均 O(1)
 data[key]         # dict 平均 O(1)
 data[key] = value # dict 平均 O(1)
@@ -44,7 +44,7 @@ items.add(item)   # set 平均 O(1)
 
 ## `deque`
 
-```python
+```python playground=python-complexity-deque
 queue.append(x)       # O(1)
 queue.appendleft(x)   # O(1)
 queue.pop()           # O(1)
@@ -56,7 +56,7 @@ queue[index]          # 两端较快，中间访问不适合作为主要用途
 
 ## `heapq`
 
-```python
+```python playground=python-complexity-heap
 heapq.heapify(items)   # O(n)
 heapq.heappush(heap,x)  # O(log n)
 heapq.heappop(heap)    # O(log n)
@@ -80,13 +80,14 @@ heapq.nlargest(k, xs)  # 约 O(n log k)，实现会根据情况优化
 
 例如，下面两种写法功能相近，但复杂度不同：
 
-```python
+```python playground=python-standard-library-03-complexity
 # 每次从头部删除，整体可能是 O(n²)
 while items:
     items.pop(0)
 
 # 双端队列逐个从左侧删除，整体约 O(n)
 from collections import deque
+items = [1, 2, 3]
 queue = deque(items)
 while queue:
     queue.popleft()

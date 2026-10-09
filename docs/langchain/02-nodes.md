@@ -20,7 +20,7 @@ RAG（检索增强生成）就是为此采用的一种方法：根据用户的�
 
 输入可能带有多余空白，我们可以去掉首尾空白，并把连续空白合并成一个空格，供后续步骤使用。用 Python 就可以完成这个处理：
 
-```python
+```python playground
 def clean_query(text: str) -> str:
     return " ".join(text.split())
 
@@ -37,7 +37,7 @@ print(clean_query("  RAG   怎么更新？  "))
 
 用普通 Python 函数也能完成串联。以前面的输入处理为例，知识库更新的问题涉及索引版本，我们可以在清理后的文本中补上“索引版本”，作为后续检索的关键词。手动调用时，先执行清理函数，再把它的结果交给关键词补充函数：
 
-```python
+```python playground=langchain-python
 def add_keywords(query: str, hint: str = "索引版本") -> str:
     return f"{query} {hint}"
 
@@ -56,7 +56,7 @@ Runnable 用统一的接口规范串联这些处理步骤。提示模板、模�
 
 包装时传入 `clean_query` 这个函数本身，创建 Runnable 不会执行清理。调用 `invoke()` 时才把输入交给它：
 
-```python
+```python playground=langchain-runnable
 from langchain_core.runnables import RunnableLambda
 
 normalize_query = RunnableLambda(clean_query)
@@ -68,7 +68,7 @@ print(normalize_query.invoke("  RAG   怎么更新？  "))
 
 我们也可以把补充关键词的函数包装起来，声明两个步骤的先后关系：
 
-```python
+```python playground=langchain-runnable
 add_hint = RunnableLambda(add_keywords)
 pipeline = normalize_query | add_hint
 print(pipeline.invoke("  RAG   怎么更新？  "))
@@ -81,7 +81,7 @@ print(pipeline.invoke("  RAG   怎么更新？  "))
 
 如果关键词也由调用方提供，就需要同时传入问题和关键词。可以把它们放在同一份字典里，让包装函数读取字段，再调用原来的函数：
 
-```python
+```python playground=langchain-runnable
 prepare_query = RunnableLambda(
     lambda data: add_keywords(clean_query(data["question"]), data["hint"])
 )

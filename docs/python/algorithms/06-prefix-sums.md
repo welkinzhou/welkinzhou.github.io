@@ -14,7 +14,7 @@ tags: [Python]
 
 给定整数列表，多次查询某个闭区间 `[left, right]` 的元素和。例如：
 
-```python
+```python playground=python-algorithms-06-prefix-sums
 nums = [2, 4, 1, 3, 5]
 query(1, 3)  # 4 + 1 + 3 = 8
 ```
@@ -42,7 +42,7 @@ prefix[right + 1] - prefix[left]
 
 ## 示例代码
 
-```python
+```python playground=python-algorithms-06-prefix-sums
 class RangeSum:
     def __init__(self, nums: list[int]):
         self.prefix = [0]
@@ -68,12 +68,12 @@ print(range_sum.query(0, 4))  # 15
 
 这里使用长度为 `n + 1` 的前缀数组：
 
-```python
+```python playground=python-algorithms-06-prefix-sums
 prefix = [0] * (len(nums) + 1)
 ```
 
 多出的第一个 `0` 让从下标 `0` 开始的区间也能统一计算：
 
-```python
+```python playground=python-algorithms-06-prefix-sums
 total = prefix[right + 1] - prefix[0]
 ```

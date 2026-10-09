@@ -14,7 +14,7 @@ tags: [Python]
 
 字符串是有序序列，可以按位置读取。索引从 `0` 开始；负数索引从末尾倒数。单个索引越界会抛出 `IndexError`，切片越界则会自动截到有效范围。
 
-```python
+```python playground
 text = "python"
 
 text[0]     # "p"
@@ -30,7 +30,7 @@ text[::-1]  # "nohtyp"，反向切片
 
 字符串创建后不能通过下标修改字符；字符串方法通常返回一个新字符串，不会修改原字符串。
 
-```python
+```python playground
 name = " Ada "
 clean_name = name.strip().lower()
 
@@ -42,7 +42,7 @@ print(name)        # " Ada "，原字符串不变
 
 ## 常用字符串 API
 
-```python
+```python playground
 line = "  alpha,beta,,gamma  "
 
 line.strip()                   # 去掉两端空白
@@ -60,7 +60,7 @@ line.count(",")                # 统计子串出现次数
 
 ## API 组合小例子：规范化逗号分隔输入
 
-```python
+```python playground
 raw = "  red, green,, BLUE  "
 
 items = [part.strip().lower() for part in raw.split(",") if part.strip()]

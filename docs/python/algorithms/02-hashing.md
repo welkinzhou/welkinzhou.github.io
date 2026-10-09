@@ -24,7 +24,7 @@ tags: [Python]
 
 ### 示例代码
 
-```python
+```python playground=python-algorithms-02-hashing
 def count_numbers(nums: list[int]) -> dict[int, int]:
     counts: dict[int, int] = {}
 
@@ -61,7 +61,7 @@ print(count_numbers([2, 1, 2, 3, 1, 2]))
 
 ### 示例代码
 
-```python
+```python playground=python-algorithms-02-hashing
 def two_sum(nums: list[int], target: int) -> list[int]:
     index_by_num: dict[int, int] = {}
 
@@ -101,7 +101,7 @@ print(two_sum([2, 7, 11, 15], 9))  # [0, 1]
 
 ### 示例代码
 
-```python
+```python playground=python-algorithms-02-hashing
 def is_anagram(s: str, t: str) -> bool:
     if len(s) != len(t):
         return False
@@ -145,7 +145,7 @@ print(is_anagram("rat", "car"))          # False
 
 ### 示例代码
 
-```python
+```python playground=python-algorithms-02-hashing
 def longest_palindrome_length(text: str) -> int:
     counts: dict[str, int] = {}
 

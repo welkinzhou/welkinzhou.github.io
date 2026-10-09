@@ -14,7 +14,7 @@ tags: [Python]
 
 堆是一种特殊的列表结构，`heapq` 默认维护最小堆：下标 0 始终是当前最小值。
 
-```python
+```python playground
 import heapq
 
 heap = []
@@ -28,7 +28,7 @@ heapq.heappop(heap)  # 2，删除并返回最小值
 
 也可以把已有列表原地转换成堆：
 
-```python
+```python playground=python-standard-library-02-heapq-bisect
 nums = [5, 2, 8, 1]
 heapq.heapify(nums)
 # nums 现在满足堆结构，nums[0] == 1
@@ -38,7 +38,7 @@ heapq.heapify(nums)
 
 ## 用堆取 Top-K
 
-```python
+```python playground=python-standard-library-02-heapq-bisect
 scores = [5, 1, 9, 3, 7]
 
 heapq.nlargest(3, scores)   # [9, 7, 5]
@@ -47,7 +47,7 @@ heapq.nsmallest(2, scores)  # [1, 3]
 
 对对象按字段取 Top-K：
 
-```python
+```python playground=python-standard-library-02-heapq-bisect
 items = [("a", 5), ("b", 9), ("c", 3)]
 top = heapq.nlargest(2, items, key=lambda item: item[1])
 # [("b", 9), ("a", 5)]
@@ -59,7 +59,7 @@ top = heapq.nlargest(2, items, key=lambda item: item[1])
 
 Python 3.14 起提供公开的最大堆 API，可以直接维护堆顶为最大值的列表：
 
-```python
+```python playground
 import heapq
 
 max_heap = [5, 2, 8]
@@ -70,7 +70,7 @@ largest = heapq.heappop_max(max_heap)  # 9
 
 较早版本可对数值取负，再使用最小堆 API：
 
-```python
+```python playground=python-standard-library-02-heapq-bisect
 values = [5, 2, 8]
 max_heap = [-value for value in values]
 heapq.heapify(max_heap)
@@ -83,7 +83,7 @@ largest = -heapq.heappop(max_heap)
 
 `bisect` 要求列表已经有序。`bisect_left` 返回目标值应该插入的最左位置，`bisect_right` 返回最右位置：
 
-```python
+```python playground
 import bisect
 
 nums = [1, 3, 3, 5, 8]
@@ -95,7 +95,7 @@ bisect.bisect_left(nums, 4)   # 3
 
 保持列表有序地插入：
 
-```python
+```python playground=python-standard-library-02-heapq-bisect
 bisect.insort(nums, 4)
 # [1, 3, 3, 4, 5, 8]
 ```
@@ -104,7 +104,7 @@ bisect.insort(nums, 4)
 
 ## 判断是否存在和统计范围
 
-```python
+```python playground=python-standard-library-02-heapq-bisect
 nums = [1, 3, 3, 5, 8]
 left = bisect.bisect_left(nums, 3)
 right = bisect.bisect_right(nums, 3)
@@ -119,7 +119,7 @@ count = right - left
 
 不同 API 的行为不同：
 
-```python
+```python playground
 import heapq
 
 heap = [2, 5, 8]
@@ -137,7 +137,7 @@ heapq.heappush(heap, 1)
 
 `heapq.nlargest` 和 `heapq.nsmallest` 返回新的列表，通常不会修改传入的原列表：
 
-```python
+```python playground=python-standard-library-02-heapq-bisect
 values = [5, 1, 9, 3]
 top = heapq.nlargest(2, values)
 
