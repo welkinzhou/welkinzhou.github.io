@@ -1,0 +1,11 @@
+---
+description: 当前项目 Agent Skill 的校验环境与 PyYAML 缺失时的处理
+globs: ".cursor/skills/**"
+alwaysApply: false
+---
+
+# 技能校验环境
+
+- 本项目当前的系统 `python3` 没有 PyYAML。直接运行 skill-creator 的 `quick_validate.py` 会报 `ModuleNotFoundError: No module named 'yaml'`；遇到这个错误不要重复执行同一命令。
+- 修改本项目技能时，优先用已有且包含 PyYAML 的 Python 环境运行 `quick_validate.py`。若没有可用环境，使用仓库已安装的 Node `yaml` 包解析 `SKILL.md` 的 frontmatter，再按校验脚本核对必需字段、允许的键、未完成的 TODO 和代码围栏。交付时说明这是替代检查，不声称 `quick_validate.py` 已通过。
+- 这是本项目的校验环境说明，不写入通用文章写作技能，也不为一次校验修改全局 Python 环境。

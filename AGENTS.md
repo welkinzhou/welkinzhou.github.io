@@ -12,3 +12,7 @@
 - 撰写、改写或润色任何文章时，读取并应用 [通用文章写作技能](.cursor/skills/article-writing/SKILL.md)。它位于 Cursor 项目技能目录，内容可跨项目复用；后续同步到个人 Codex 技能时只携带该技能目录。
 - 当前站点的分类、命名、博客结构、标题与验证要求，统一读取 [项目文章规范](.cursor/rules/article-project.mdc)。这些约定只属于本仓库。
 - 用户继续逐段纠正时，通用表达偏好更新技能入口，Markdown 用法偏好更新技能的按需参考文件，站点分类、命名和渲染要求更新项目规范；不再按博客、LangChain 或其他技术主题拆分同类写作规则。
+
+## 技能校验
+
+- 修改本项目 `.cursor/skills/**` 中的技能时，读取[项目技能校验环境](.cursor/rules/skill-validation.mdc)，按其中的 PyYAML 缺失处理办法验证。

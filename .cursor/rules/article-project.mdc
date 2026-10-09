@@ -44,5 +44,5 @@ alwaysApply: false
 
 - 保留 frontmatter、slug、标签、链接目标、图片路径、代码块及 MDX/Mermaid 结构；涉及路由或资源移动时检查所有受影响引用。
 - 文章修改后检查差异并运行 `npm run build`；标题或结构变更还要核对生成页面的 H1、目录与锚点。涉及 TypeScript、React 组件或站点配置时同时运行 `npm run typecheck`。
-- 纯规则或技能编辑检查格式、引用与差异；技能使用 skill-creator 的 `quick_validate.py` 校验，不因只改说明文件要求完整站点构建。
+- 纯规则或技能编辑检查格式、引用与差异；技能校验按[本项目技能校验环境](skill-validation.mdc)处理，不因只改说明文件要求完整站点构建。
 - 本文件是当前项目约定，不随通用写作技能迁移到其他项目。标题行为依据 Docusaurus [标题与目录](https://docusaurus.io/docs/markdown-features/toc)、[博客 frontmatter](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog#markdown-front-matter)、[docs frontmatter](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#markdown-front-matter)，以及项目安装的 Docusaurus 3.10.2 源码。
